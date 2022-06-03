@@ -1,0 +1,37 @@
+{
+  "name": "@micro-os-plus/architecture-cortexa",
+  "version": "1.0.0",
+  "description": "A source library xPack with the µOS++ Arm Cortex-A architecture",
+  "main": "",
+  "scripts": {
+    "npm-install": "npm install",
+    "pack": "npm pack",
+    "version-patch": "npm version patch",
+    "version-minor": "npm version minor",
+    "postversion": "git push origin --all && git push origin --tags",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micro-os-plus/architecture-cortexa-xpack.git/"
+  },
+  "keywords": [
+    "xpack",
+    "c++",
+    "posix",
+    "micro-os-plus",
+    "cortex-a"
+  ],
+  "homepage": "https://github.com/micro-os-plus/architecture-cortexa-xpack/",
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul/"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micro-os-plus/architecture-cortexa-xpack/issues/"
+  },
+  "config": {},
+  "xpack": {}
+}

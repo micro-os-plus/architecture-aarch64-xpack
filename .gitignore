@@ -103,21 +103,58 @@ dist
 # TernJS port file
 .tern-port
 
-# added for xPack
+# Prerequisites
+*.d
 
-.vscode/c_cpp_properties.json
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
 
 # xpm
-node_modules/
 xpacks/
-build/
-
-*.tgz
 
 # Windows
 Thumbs.db
 
 # macOS
 .DS_Store
+
+# Eclipse
+.settings/
+Debug*/
+Release*/
+
+# Builds
+build/
+
+.vscode/c_cpp_properties.json
+
+tests/top
 
 # end
