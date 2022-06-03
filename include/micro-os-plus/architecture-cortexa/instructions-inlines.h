@@ -32,11 +32,11 @@ extern "C"
   {
     __asm__ volatile(
 
-      " nop "
+        " nop "
 
-      : /* Outputs */
-      : /* Inputs */
-      : /* Clobbers */
+        : /* Outputs */
+        : /* Inputs */
+        : /* Clobbers */
     );
   }
 
@@ -46,23 +46,23 @@ extern "C"
 #if defined(__ARM_ARCH_8A)
     __asm__ volatile(
 
-	  // See 'aarch64-tdep.c' in GDB source, 'aarch64_default_breakpoint'
-      // " .inst 0xd4200000 "
-      " brk #0 "
+        // See 'aarch64-tdep.c' in GDB source, 'aarch64_default_breakpoint'
+        // " .inst 0xd4200000 "
+        " brk #0 "
 
-      : /* Outputs */
-      : /* Inputs */
-      : /* Clobbers */
+        : /* Outputs */
+        : /* Inputs */
+        : /* Clobbers */
     );
 #elif defined(__ARM_ARCH_7A__)
-    __asm__ volatile(
+  __asm__ volatile(
 
       " bkpt 0 "
 
       : /* Outputs */
       : /* Inputs */
       : /* Clobbers */
-    );
+  );
 #else
 #error "Unsupported architecture."
 #endif
@@ -115,61 +115,55 @@ extern "C"
 
 #if defined(__cplusplus)
 
-namespace cortexa
+namespace cortexa::architecture
 {
-  namespace architecture
+  // --------------------------------------------------------------------------
+
+  inline __attribute__ ((always_inline)) void
+  nop (void)
   {
-    // ------------------------------------------------------------------------
+    cortexa_architecture_nop ();
+  }
 
-    inline __attribute__ ((always_inline)) void
-    nop (void)
-    {
-      cortexa_architecture_nop ();
-    }
+  inline __attribute__ ((always_inline)) void
+  bkpt (void)
+  {
+    cortexa_architecture_bkpt ();
+  }
 
-    inline __attribute__ ((always_inline)) void
-    bkpt (void)
-    {
-      cortexa_architecture_bkpt ();
-    }
+  inline __attribute__ ((always_inline)) void
+  wfi (void)
+  {
+    cortexa_architecture_wfi ();
+  }
 
-    inline __attribute__ ((always_inline)) void
-    wfi (void)
-    {
-      cortexa_architecture_wfi ();
-    }
+  // --------------------------------------------------------------------------
+} // namespace cortexa::architecture
 
-    // ------------------------------------------------------------------------
-  } // namespace architecture
-} // namespace cortexa
-
-namespace micro_os_plus
+namespace micro_os_plus::architecture
 {
-  namespace architecture
+  // --------------------------------------------------------------------------
+
+  inline __attribute__ ((always_inline)) void
+  nop (void)
   {
-    // ------------------------------------------------------------------------
+    cortexa::architecture::nop ();
+  }
 
-    inline __attribute__ ((always_inline)) void
-    nop (void)
-    {
-      cortexa::architecture::nop ();
-    }
+  inline __attribute__ ((always_inline)) void
+  brk (void)
+  {
+    cortexa::architecture::bkpt ();
+  }
 
-    inline __attribute__ ((always_inline)) void
-    brk (void)
-    {
-      cortexa::architecture::bkpt ();
-    }
+  inline __attribute__ ((always_inline)) void
+  wfi (void)
+  {
+    cortexa::architecture::wfi ();
+  }
 
-    inline __attribute__ ((always_inline)) void
-    wfi (void)
-    {
-      cortexa::architecture::wfi ();
-    }
-
-    // ------------------------------------------------------------------------
-  } // namespace architecture
-} // namespace micro_os_plus
+  // --------------------------------------------------------------------------
+} // namespace micro_os_plus::architecture
 
 #endif // defined(__cplusplus)
 

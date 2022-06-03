@@ -88,25 +88,31 @@ running on **Arm Cortex-A** devices.
 
 ### Status
 
-The µOS++ Cortex-A scheduler port is fully functional.
+The µOS++ Cortex-A definitions are minimalistic, for running the tests.
 
 ### Build & integration info
 
 To include this package in a project, consider the following details.
 
-#### Source folders
-
-- `src`
-
 #### Include folders
 
 - `include`
 
-TODO: list the available headeres
+The header file to be included is:
+
+```c++
+#include <micro-os-plus/architecture.h>
+```
+
+#### Source files
+
+The source files to be added are:
+
+- `src/vectors.S`
 
 #### Preprocessor definitions
 
-TBD
+- none
 
 #### Compiler options
 
@@ -115,11 +121,11 @@ TBD
 
 #### C++ Namespaces
 
-TBD
+- `micro_os_plus::architecture`
 
 #### C++ Classes
 
-TBD
+- none
 
 ### Examples
 

@@ -26,8 +26,8 @@ extern "C"
   typedef uint64_t cortexa_architecture_register_t;
   typedef uint64_t micro_os_plus_architecture_register_t;
 #else
-  typedef uint32_t cortexa_architecture_register_t;
-  typedef uint32_t micro_os_plus_architecture_register_t;
+typedef uint32_t cortexa_architecture_register_t;
+typedef uint32_t micro_os_plus_architecture_register_t;
 #endif
 
 #if defined(__cplusplus)
@@ -40,29 +40,23 @@ extern "C"
 
 // ----------------------------------------------------------------------------
 
-namespace cortexa
+namespace cortexa::architecture
 {
-  namespace architecture
-  {
-    // ------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
-    using register_t = cortexa_architecture_register_t;
+  using register_t = cortexa_architecture_register_t;
 
-    // ------------------------------------------------------------------------
-  } // namespace architecture
-} // namespace cortexa
+  // --------------------------------------------------------------------------
+} // namespace cortexa::architecture
 
-namespace micro_os_plus
+namespace micro_os_plus::architecture
 {
-  namespace architecture
-  {
-    // ------------------------------------------------------------------------
+  // --------------------------------------------------------------------------
 
-    using register_t = cortexa_architecture_register_t;
+  using register_t = cortexa_architecture_register_t;
 
-    // ------------------------------------------------------------------------
-  } // namespace architecture
-} // namespace micro_os_plus
+  // --------------------------------------------------------------------------
+} // namespace micro_os_plus::architecture
 
 // ----------------------------------------------------------------------------
 

@@ -55,46 +55,33 @@ extern "C"
 
 #if defined(__cplusplus)
 
-namespace cortexa
+namespace cortexa::architecture::registers
 {
-  namespace architecture
-  {
-    namespace registers
-    {
-      // ----------------------------------------------------------------------
-      // Architecture getters in C++.
+  // --------------------------------------------------------------------------
+  // Architecture getters in C++.
 
-      /**
-       * Main Stack Pointer getter.
-       */
-      register_t
-      msp (void);
+  /**
+   * Main Stack Pointer getter.
+   */
+  register_t
+  msp (void);
 
-      // ----------------------------------------------------------------------
-    } // namespace registers
-  } // namespace architecture
-} // namespace cortexa
+  // --------------------------------------------------------------------------
+} // namespace cortexa::architecture::registers
 
-namespace micro_os_plus
+namespace micro_os_plus::architecture::registers
 {
-  namespace architecture
-  {
-    namespace registers
-    {
-      // ------------------------------------------------------------------------
-      // Portable architecture assembly instructions in C++.
+  // --------------------------------------------------------------------------
+  // Portable architecture assembly instructions in C++.
 
-      /**
-       * Main Stack Pointer getter.
-       */
-      register_t
-      sp (void);
-    }
+  /**
+   * Main Stack Pointer getter.
+   */
+  register_t
+  sp (void);
 
-    // ------------------------------------------------------------------------
-  }
-} // namespace architecture
-} // namespace micro_os_plus
+  // --------------------------------------------------------------------------
+} // namespace micro_os_plus::architecture::registers
 
 #endif // defined(__cplusplus)
 

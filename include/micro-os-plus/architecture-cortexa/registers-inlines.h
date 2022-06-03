@@ -36,7 +36,7 @@ extern "C"
 
         "msr %0, msp"
 
-        : "=r" (result) /* Outputs */
+        : "=r"(result) /* Outputs */
         : /* Inputs */
         : /* Clobbers */
     );
@@ -54,37 +54,31 @@ extern "C"
 
 #if defined(__cplusplus)
 
-namespace cortexa
+namespace cortexa::architecture
 {
-  namespace architecture
+  // --------------------------------------------------------------------------
+
+  inline __attribute__ ((always_inline)) register_t
+  get_msp (void)
   {
-    // ------------------------------------------------------------------------
+    cortexa_architecture_get_msp ();
+  }
 
-    inline __attribute__ ((always_inline)) register_t
-    get_msp (void)
-    {
-      cortexa_architecture_get_msp ();
-    }
+  // --------------------------------------------------------------------------
+} // namespace cortexa::architecture
 
-    // ------------------------------------------------------------------------
-  } // namespace architecture
-} // namespace cortexa
-
-namespace micro_os_plus
+namespace micro_os_plus::architecture
 {
-  namespace architecture
+  // --------------------------------------------------------------------------
+
+  inline __attribute__ ((always_inline)) register_t
+  get_sp (void)
   {
-    // ------------------------------------------------------------------------
+    micro_os_plus_architecture_get_sp ();
+  }
 
-    inline __attribute__ ((always_inline)) register_t
-    get_sp (void)
-    {
-      micro_os_plus_architecture_get_sp ();
-    }
-
-    // ------------------------------------------------------------------------
-  } // namespace architecture
-} // namespace micro_os_plus
+  // --------------------------------------------------------------------------
+} // namespace micro_os_plus::architecture
 
 #endif // defined(__cplusplus)
 
