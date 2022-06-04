@@ -96,9 +96,11 @@ To include this package in a project, consider the following details.
 
 #### Include folders
 
+The following folders should be passed to the compiler during the build:
+
 - `include`
 
-The header file to be included is:
+The header files to be included in user projects are:
 
 ```c++
 #include <micro-os-plus/architecture.h>
@@ -106,7 +108,7 @@ The header file to be included is:
 
 #### Source files
 
-The source files to be added are:
+The source files to be added to user projects are:
 
 - `src/vectors.S`
 
@@ -149,7 +151,7 @@ backwards incompatible changes are introduced to the public API.
 The incompatible changes, in reverse chronological order,
 are:
 
-- v1.x: initial version
+- v1.x: initial release
 
 ## License
 
