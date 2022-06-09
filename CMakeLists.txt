@@ -54,7 +54,6 @@ target_include_directories(micro-os-plus-architecture-cortexa-interface INTERFAC
 )
 
 target_sources(micro-os-plus-architecture-cortexa-interface INTERFACE
-  "src/vectors.S"
 )
 
 target_compile_definitions(micro-os-plus-architecture-cortexa-interface INTERFACE
