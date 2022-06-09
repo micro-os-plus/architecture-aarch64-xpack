@@ -36,6 +36,8 @@ extern "C"
   static cortexa_architecture_register_t
   cortexa_architecture_get_msp (void);
 
+  // TODO: add setter.
+
   // --------------------------------------------------------------------------
   // Portable architecture assembly instructions in C.
 
@@ -44,6 +46,8 @@ extern "C"
    */
   static micro_os_plus_architecture_register_t
   micro_os_plus_architecture_get_sp (void);
+
+  // TODO: add setter.
 
   // --------------------------------------------------------------------------
 
@@ -66,6 +70,8 @@ namespace cortexa::architecture::registers
   register_t
   msp (void);
 
+  // TODO: add setter.
+
   // --------------------------------------------------------------------------
 } // namespace cortexa::architecture::registers
 
@@ -80,6 +86,8 @@ namespace micro_os_plus::architecture::registers
   register_t
   sp (void);
 
+  // TODO: add setter.
+  
   // --------------------------------------------------------------------------
 } // namespace micro_os_plus::architecture::registers
 
