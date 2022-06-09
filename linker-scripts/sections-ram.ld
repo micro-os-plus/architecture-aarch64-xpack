@@ -349,7 +349,7 @@ SECTIONS
   /* _sbrk() expects at least word alignment. */
   . = ALIGN(8);
   PROVIDE( __end__ = . ); /* Used by crt0.S arm & aarch64 */
-  PROVIDE( __end = . ); /* Used by crt0.S spark, m68k */
+  PROVIDE( __end = . ); /* Used by crt0.S sparc, m68k */
   PROVIDE( _end = . ); /* Used by libgloss sbrk() */
   PROVIDE( end = . ); /* Used by newlib _sbrk() arm & aarch64 */
 
