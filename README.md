@@ -110,7 +110,7 @@ The header files to be included in user projects are:
 
 The source files to be added to user projects are:
 
-- `src/vectors.S`
+- none
 
 #### Preprocessor definitions
 
@@ -123,7 +123,15 @@ The source files to be added to user projects are:
 
 #### C++ Namespaces
 
+Portable:
+
 - `micro_os_plus::architecture`
+- `micro_os_plus::architecture::registers`
+
+Architecture specific:
+
+- `cortexa::architecture`
+- `cortexa::architecture::registers`
 
 #### C++ Classes
 
@@ -131,11 +139,19 @@ The source files to be added to user projects are:
 
 ### Examples
 
-TBD
+```c++
+#include <micro-os-plus/architecture.h>
+
+using namespace micro_os_plus;
+
+architecture::register_t reg;
+
+reg = architecture::registers::sp();
+```
 
 ### Known problems
 
-- none
+- does not use CMSIS Core (yet)
 
 ### Tests
 
@@ -151,6 +167,8 @@ backwards incompatible changes are introduced to the public API.
 The incompatible changes, in reverse chronological order,
 are:
 
+- v2.x: exception handling moved to qemu device for now;
+  sections-flash.ld removed
 - v1.x: initial release
 
 ## License
