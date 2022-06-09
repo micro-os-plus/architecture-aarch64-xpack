@@ -44,6 +44,13 @@ extern "C"
     return result;
   }
 
+  static inline __attribute__ ((always_inline))
+  micro_os_plus_architecture_register_t
+  micro_os_plus_architecture_get_sp (void)
+  {
+    return cortexa_architecture_get_msp ();
+  }
+
   // --------------------------------------------------------------------------
 
 #if defined(__cplusplus)
@@ -54,31 +61,31 @@ extern "C"
 
 #if defined(__cplusplus)
 
-namespace cortexa::architecture
+namespace cortexa::architecture::registers
 {
   // --------------------------------------------------------------------------
 
   inline __attribute__ ((always_inline)) register_t
-  get_msp (void)
+  msp (void)
   {
-    cortexa_architecture_get_msp ();
+    return cortexa_architecture_get_msp ();
   }
 
   // --------------------------------------------------------------------------
-} // namespace cortexa::architecture
+} // namespace cortexa::architecture::registers
 
-namespace micro_os_plus::architecture
+namespace micro_os_plus::architecture::registers
 {
   // --------------------------------------------------------------------------
 
   inline __attribute__ ((always_inline)) register_t
-  get_sp (void)
+  sp (void)
   {
-    micro_os_plus_architecture_get_sp ();
+    return micro_os_plus_architecture_get_sp ();
   }
 
   // --------------------------------------------------------------------------
-} // namespace micro_os_plus::architecture
+} // namespace micro_os_plus::architecture::registers
 
 #endif // defined(__cplusplus)
 
