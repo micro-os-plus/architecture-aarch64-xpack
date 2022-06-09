@@ -8,7 +8,7 @@ and close existing issues and pull requests.
 
 ## 2022-06-09
 
-* v2.0.0 prepared
+* v2.0.0 released
 * 7dcab86 sections-ram.ld update stack & heap; cleanups
 * 3419641 remove sections-flash.ld
 * 26f568c architecture.h: include registers-inlines.h
