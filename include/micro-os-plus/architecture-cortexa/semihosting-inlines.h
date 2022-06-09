@@ -25,14 +25,14 @@ extern "C"
 {
 #endif // defined(__cplusplus)
 
-// ----------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------
 
-// Type of each entry in a parameter block.
-typedef micro_os_plus_architecture_register_t
-  micro_os_plus_semihosting_param_block_t;
-// Type of result.
-typedef micro_os_plus_architecture_register_t
-  micro_os_plus_semihosting_response_t;
+  // Type of each entry in a parameter block.
+  typedef micro_os_plus_architecture_register_t
+      micro_os_plus_semihosting_param_block_t;
+  // Type of result.
+  typedef micro_os_plus_architecture_register_t
+      micro_os_plus_semihosting_response_t;
 
 // SWI numbers and reason codes for RDI (Angel) monitors.
 #if defined(__ARM_ARCH_8A)
@@ -48,15 +48,15 @@ typedef micro_os_plus_architecture_register_t
     micro_os_plus_semihosting_response_t value;
     __asm__ volatile(
 
-      " mov w0, %w1 \n"
-      " mov x1, %2 \n"
-      " " AngelSVCInsn " %3 \n"
-      " mov %0, x0 \n"
+        " mov w0, %w1 \n"
+        " mov x1, %2 \n"
+        " " AngelSVCInsn " %3 \n"
+        " mov %0, x0 \n"
 
-      : "=r"(value) /* Outputs */
-      : "r"(reason), "r"(arg), "n"(AngelSVC) /* Inputs */
-      : "x0", "x1", "x2", "x3", "x17", "x30", "memory", "cc"
-      /* Clobbers x0 and x1, and lr if in supervisor mode */
+        : "=r"(value) /* Outputs */
+        : "r"(reason), "r"(arg), "n"(AngelSVC) /* Inputs */
+        : "x0", "x1", "x2", "x3", "x17", "x30", "memory", "cc"
+        /* Clobbers x0 and x1, and lr if in supervisor mode */
     );
 
     // Accordingly to page 13-77 of ARM DUI 0040D other registers
@@ -80,13 +80,13 @@ typedef micro_os_plus_architecture_register_t
 #error "Unsupported architecture."
 #endif
 
-  static inline __attribute__ ((always_inline))
-  micro_os_plus_semihosting_response_t
-  micro_os_plus_semihosting_call_host (
-      int reason, micro_os_plus_semihosting_param_block_t* arg)
-  {
-    micro_os_plus_semihosting_response_t value;
-    __asm__ volatile(
+static inline __attribute__ ((always_inline))
+micro_os_plus_semihosting_response_t
+micro_os_plus_semihosting_call_host (
+    int reason, micro_os_plus_semihosting_param_block_t* arg)
+{
+  micro_os_plus_semihosting_response_t value;
+  __asm__ volatile(
 
       " mov r0, %[rsn] \n"
       " mov r1, %[arg] \n"
@@ -97,15 +97,15 @@ typedef micro_os_plus_architecture_register_t
       : [rsn] "r"(reason), [arg] "r"(arg), [swi] "i"(AngelSWI) /* Inputs */
       : "r0", "r1", "r2", "r3", "ip", "lr", "memory", "cc"
       // Clobbers r0 and r1, and lr if in supervisor mode
-    );
+  );
 
-    // Accordingly to page 13-77 of ARM DUI 0040D other registers
-    // can also be clobbered. Some memory positions may also be
-    // changed by a system call, so they should not be kept in
-    // registers. Note: we are assuming the manual is right and
-    // Angel is respecting the APCS.
-    return value;
-  }
+  // Accordingly to page 13-77 of ARM DUI 0040D other registers
+  // can also be clobbered. Some memory positions may also be
+  // changed by a system call, so they should not be kept in
+  // registers. Note: we are assuming the manual is right and
+  // Angel is respecting the APCS.
+  return value;
+}
 
 #else
 #error "Unsupported architecture."
