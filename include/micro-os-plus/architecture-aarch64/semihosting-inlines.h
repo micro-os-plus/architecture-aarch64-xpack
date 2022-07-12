@@ -10,15 +10,15 @@
  * be obtained from https://opensource.org/licenses/MIT/.
  */
 
-#ifndef MICRO_OS_PLUS_ARCHITECTURE_CORTEXA_SEMIHOSTING_INLINES_H_
-#define MICRO_OS_PLUS_ARCHITECTURE_CORTEXA_SEMIHOSTING_INLINES_H_
+#ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_SEMIHOSTING_INLINES_H_
+#define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_SEMIHOSTING_INLINES_H_
 
 // ----------------------------------------------------------------------------
 
 #include <stdint.h>
 
 // ----------------------------------------------------------------------------
-// Inline implementations for the Cortex-A semihosting call.
+// Inline implementations for the AArch64 semihosting call.
 
 #if defined(__cplusplus)
 extern "C"
@@ -35,8 +35,6 @@ extern "C"
       micro_os_plus_semihosting_response_t;
 
 // SWI numbers and reason codes for RDI (Angel) monitors.
-#if defined(__ARM_ARCH_8A)
-
 #define AngelSVC 0xF000
 #define AngelSVCInsn "hlt"
 
@@ -67,50 +65,6 @@ extern "C"
     return value;
   }
 
-#elif defined(__ARM_ARCH_7A__)
-
-#define AngelSWIInsn "swi"
-// The order is important, since Cortex-M defines both.
-#if defined(__thumb__)
-#define AngelSWI 0xAB
-#elif defined(__arm__)
-#define AngelSWI 0x123456
-
-#else
-#error "Unsupported architecture."
-#endif
-
-static inline __attribute__ ((always_inline))
-micro_os_plus_semihosting_response_t
-micro_os_plus_semihosting_call_host (
-    int reason, micro_os_plus_semihosting_param_block_t* arg)
-{
-  micro_os_plus_semihosting_response_t value;
-  __asm__ volatile(
-
-      " mov r0, %[rsn] \n"
-      " mov r1, %[arg] \n"
-      " " AngelSWIInsn " %[swi] \n"
-      " mov %[val], r0"
-
-      : [val] "=r"(value) /* Outputs */
-      : [rsn] "r"(reason), [arg] "r"(arg), [swi] "i"(AngelSWI) /* Inputs */
-      : "r0", "r1", "r2", "r3", "ip", "lr", "memory", "cc"
-      // Clobbers r0 and r1, and lr if in supervisor mode
-  );
-
-  // Accordingly to page 13-77 of ARM DUI 0040D other registers
-  // can also be clobbered. Some memory positions may also be
-  // changed by a system call, so they should not be kept in
-  // registers. Note: we are assuming the manual is right and
-  // Angel is respecting the APCS.
-  return value;
-}
-
-#else
-#error "Unsupported architecture."
-#endif
-
   // --------------------------------------------------------------------------
 
 #if defined(__cplusplus)
@@ -119,6 +73,6 @@ micro_os_plus_semihosting_call_host (
 
 // ----------------------------------------------------------------------------
 
-#endif // MICRO_OS_PLUS_ARCHITECTURE_CORTEXA_SEMIHOSTING_INLINES_H_
+#endif // MICRO_OS_PLUS_ARCHITECTURE_AARCH64_SEMIHOSTING_INLINES_H_
 
 // ----------------------------------------------------------------------------
