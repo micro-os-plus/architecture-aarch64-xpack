@@ -54,6 +54,7 @@ target_include_directories(micro-os-plus-architecture-aarch64-interface INTERFAC
 )
 
 target_sources(micro-os-plus-architecture-aarch64-interface INTERFACE
+  # None.
 )
 
 target_compile_definitions(micro-os-plus-architecture-aarch64-interface INTERFACE
