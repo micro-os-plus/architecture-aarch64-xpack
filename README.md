@@ -1,7 +1,10 @@
 [![license](https://img.shields.io/github/license/micro-os-plus/architecture-aarch64-xpack)](https://github.com/micro-os-plus/architecture-aarch64-xpack/blob/xpack/LICENSE)
-[![CI on Push](https://github.com/micro-os-plus/architecture-aarch64-xpack/workflows/CI%20on%20Push/badge.svg)](https://github.com/micro-os-plus/architecture-aarch64-xpack/actions?query=workflow%3A%22CI+on+Push%22)
+[![CI on Push](https://github.com/micro-os-plus/architecture-aarch64-xpack/actions/workflows/CI.yml/badge.svg)](https://github.com/micro-os-plus/architecture-aarch64-xpack/actions/workflows/CI.yml)
 
-# A source library xPacks with the µOS++ Arm AArch64 architecture definitions
+# A source library xPack with the µOS++ Arm AArch64 architecture definitions
+
+This project provides the **architecture-aarch54** source library as an xPack
+dependency and includes architecture definitions for AArch64 embedded projects.
 
 The project is hosted on GitHub as
 [micro-os-plus/architecture-aarch64-xpack](https://github.com/micro-os-plus/architecture-aarch64-xpack).
@@ -16,7 +19,7 @@ For maintainer info, please see the
 
 ## Install
 
-As a source library xPacks, the easiest way to add it to a project is via
+As a source library xPack, the easiest way to add it to a project is via
 **xpm**, but it can also be used as any Git project, for example as a submodule.
 
 ### Prerequisites
@@ -29,18 +32,7 @@ For details please follow the instructions in the
 
 ### xpm
 
-Note: the package will be available from npmjs.com at a later date.
-
-For now, it can be installed from GitHub:
-
-```sh
-cd my-project
-xpm init # Unless a package.json is already present
-
-xpm install github:micro-os-plus/architecture-aarch64-xpack
-```
-
-When ready, this package will be available as
+This package is available from npmjs.com as
 [`@micro-os-plus/architecture-aarch64`](https://www.npmjs.com/package/@micro-os-plus/architecture-aarch64)
 from the `npmjs.com` registry:
 
@@ -82,17 +74,27 @@ into `xpack`.
 
 ## Developer info
 
-This source xPack provides general AArch64 definitions an
-the implementation for the µOS++ scheduler,
-running on **Arm AArch64** devices. (not yet)
+### Overview
+
+This source xPack provides general AArch64 definitions.
 
 ### Status
 
-The µOS++ AArch64 definitions are minimalistic, for running the tests.
+The **architecture-aarch64** source library is fully functional,
+but minimalistic, for running semihosted tests.
 
 ### Build & integration info
 
-To include this package in a project, consider the following details.
+The project is written in C++ and assembly and it is expected
+to be used in C and C++ projects.
+
+The source code was compiled with aarch64-none-elf-gcc 11
+and should be warning free.
+
+To ease the integration of this package into user projects, there
+are already made CMake and meson configuration files (see below).
+
+For other build systems, consider the following details:
 
 #### Include folders
 
@@ -137,6 +139,53 @@ Architecture specific:
 
 - none
 
+#### Dependencies
+
+- none
+
+#### CMake
+
+To integrate the architecture-aarch64 source library into a CMake application,
+add this folder to the build:
+
+```cmake
+add_subdirectory("xpacks/micro-os-plus-architecture-aarch64")`
+```
+
+The result is an interface library that can be added as an application
+dependency with:
+
+```cmake
+target_link_libraries(your-target PRIVATE
+
+  micro-os-plus::architecture-aarch64
+)
+```
+
+#### meson
+
+To integrate the architecture-aarch64 library into a meson application,
+add this folder to the build:
+
+```meson
+subdir('xpacks/micro-os-plus-architecture-aarch64')
+```
+
+The result is a dependency object that can be added
+to an application with:
+
+```meson
+exe = executable(
+  your-target,
+  link_with: [
+    # Nothing, not static.
+  ],
+  dependencies: [
+    micro_os_plus_architecture_aarch64_dependency,
+  ]
+)
+```
+
 ### Examples
 
 ```c++
@@ -167,9 +216,9 @@ backwards incompatible changes are introduced to the public API.
 The incompatible changes, in reverse chronological order,
 are:
 
-- v2.x: exception handling moved to qemu device for now;
-  sections-flash.ld removed
-- v1.x: initial release
+- v3.x: first AArch64 release
+
+(previous releases were part of devices-qemu-cortexa)
 
 ## License
 
