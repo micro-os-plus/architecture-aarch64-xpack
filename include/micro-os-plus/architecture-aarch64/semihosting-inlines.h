@@ -46,13 +46,13 @@ extern "C"
     micro_os_plus_semihosting_response_t value;
     __asm__ volatile(
 
-        " mov w0, %w1 \n"
-        " mov x1, %2 \n"
-        " " AngelSVCInsn " %3 \n"
-        " mov %0, x0 \n"
+        " mov w0, %[rsn] \n"
+        " mov x1, %[arg] \n"
+        " " AngelSVCInsn " %[svc] \n"
+        " mov %[val], x0 \n"
 
-        : "=r"(value) /* Outputs */
-        : "r"(reason), "r"(arg), "n"(AngelSVC) /* Inputs */
+        : [val] "=r"(value) /* Outputs */
+        : [rsn] "r"(reason), [arg] "r"(arg), [svc] "n"(AngelSVC) /* Inputs */
         : "x0", "x1", "x2", "x3", "x17", "x30", "memory", "cc"
         /* Clobbers x0 and x1, and lr if in supervisor mode */
     );
