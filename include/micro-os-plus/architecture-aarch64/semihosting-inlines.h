@@ -46,7 +46,7 @@ extern "C"
     micro_os_plus_semihosting_response_t value;
     __asm__ volatile(
 
-        " mov w0, %[rsn] \n"
+        " mov w0, %w[rsn] \n"
         " mov x1, %[arg] \n"
         " " AngelSVCInsn " %[svc] \n"
         " mov %[val], x0 \n"
