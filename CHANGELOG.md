@@ -9,6 +9,7 @@ and close existing issues and pull requests.
 ## 2022-07-28
 
 * v3.1.0
+* e12c9d9 #2: fix w register name
 * 1b8dbe0 #2: use names for semihosting_call_host() args
 * 5423ec0 #1: Add signed_register_t for semihosting result
 
