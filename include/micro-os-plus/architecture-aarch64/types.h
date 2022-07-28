@@ -23,7 +23,12 @@ extern "C"
 #endif // defined(__cplusplus)
 
   typedef uint64_t aarch64_architecture_register_t;
-  typedef uint64_t micro_os_plus_architecture_register_t;
+  typedef int64_t aarch64_architecture_signed_register_t;
+
+  typedef aarch64_architecture_register_t
+      micro_os_plus_architecture_register_t;
+  typedef aarch64_architecture_signed_register_t
+      micro_os_plus_architecture_signed_register_t;
 
 #if defined(__cplusplus)
 }
@@ -40,6 +45,7 @@ namespace aarch64::architecture
   // --------------------------------------------------------------------------
 
   using register_t = aarch64_architecture_register_t;
+  using signed_register_t = aarch64_architecture_signed_register_t;
 
   // --------------------------------------------------------------------------
 } // namespace aarch64::architecture
@@ -49,6 +55,7 @@ namespace micro_os_plus::architecture
   // --------------------------------------------------------------------------
 
   using register_t = aarch64_architecture_register_t;
+  using signed_register_t = aarch64_architecture_signed_register_t;
 
   // --------------------------------------------------------------------------
 } // namespace micro_os_plus::architecture
