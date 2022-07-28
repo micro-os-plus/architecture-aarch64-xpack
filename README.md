@@ -218,7 +218,7 @@ are:
 
 - v3.x: first AArch64 release
 
-(previous releases were part of devices-qemu-cortexa)
+(previous releases were part of architecture-cortexa)
 
 ## License
 

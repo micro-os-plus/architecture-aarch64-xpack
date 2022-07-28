@@ -6,6 +6,17 @@ Please check
 [GitHub](https://github.com/micro-os-plus/architecture-aarch64-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2022-07-28
+
+* v3.1.0
+* 1b8dbe0 #2: use names for semihosting_call_host() args
+* 5423ec0 #1: Add signed_register_t for semihosting result
+
+## 2022-07-25
+
+* 9a7e15d define.h comment out MICRO_OS_PLUS_HAS_INTERRUPTS_STACK
+* a13ed7e add preliminary xpack.json
+
 ## 2022-07-12
 
 * v3.0.0
