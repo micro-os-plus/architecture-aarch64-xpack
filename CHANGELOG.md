@@ -6,6 +6,25 @@ Please check
 [GitHub](https://github.com/micro-os-plus/architecture-aarch64-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2023-05-08
+
+* v3.2.0
+* 1b365eb #3: add _init_fini()
+
+## 2022-08-16
+
+* 01a9ed5 package.json min 0.14.0 & defaults
+
+## 2022-08-03
+
+* fb1ddcd .vscode/settings.json: cmake.ignoreCMakeListsMissing
+* 8966ef3 .vscode/settings.json: makefile.configureOnOpen
+
+## 2022-07-28
+
+* 72122b6 CHANGELOG update
+* e12c9d9 #2: fix w register name
+
 ## 2022-07-28
 
 * v3.1.0
