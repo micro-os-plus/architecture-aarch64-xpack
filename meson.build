@@ -14,7 +14,7 @@
 
 # This file is intended to be consumed by applications with:
 #
-# `subdir('xpacks/micro-os-plus-architecture-aarch64')`
+# `subdir('xpacks/@micro-os-plus/architecture-aarch64')`
 #
 # The result is a dependency that can be referred as:
 #

@@ -51,7 +51,7 @@ xpm init # Unless a package.json is already present
 
 xpm install @micro-os-plus/architecture-aarch64@latest
 
-ls -l xpacks/micro-os-plus-architecture-aarch64
+ls -l xpacks/@micro-os-plus/architecture-aarch64
 ```
 
 ### Git submodule
@@ -65,7 +65,7 @@ git init # Unless already a Git project
 mkdir -p xpacks
 
 git submodule add https://github.com/micro-os-plus/architecture-aarch64-xpack.git \
-  xpacks/micro-os-plus-architecture-aarch64
+  xpacks/@micro-os-plus/architecture-aarch64
 ```
 
 ## Branches
@@ -158,7 +158,7 @@ To integrate the architecture-aarch64 source library into a CMake application,
 add this folder to the build:
 
 ```cmake
-add_subdirectory("xpacks/micro-os-plus-architecture-aarch64")`
+add_subdirectory("xpacks/@micro-os-plus/architecture-aarch64")`
 ```
 
 The result is an interface library that can be added as an application
@@ -177,7 +177,7 @@ To integrate the architecture-aarch64 library into a meson application,
 add this folder to the build:
 
 ```meson
-subdir('xpacks/micro-os-plus-architecture-aarch64')
+subdir('xpacks/@micro-os-plus/architecture-aarch64')
 ```
 
 The result is a dependency object that can be added
