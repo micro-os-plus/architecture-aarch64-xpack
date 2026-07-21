@@ -29,7 +29,7 @@ extern "C"
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_nop (void)
   {
-    __asm__ volatile(
+    __asm__ volatile (
 
         " nop "
 
@@ -42,7 +42,7 @@ extern "C"
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_bkpt (void)
   {
-    __asm__ volatile(
+    __asm__ volatile (
 
         // See 'aarch64-tdep.c' in GDB source, 'aarch64_default_breakpoint'
         // " .inst 0xd4200000 "
@@ -57,7 +57,7 @@ extern "C"
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_wfi (void)
   {
-    __asm__ volatile(
+    __asm__ volatile (
 
         " wfi "
 
