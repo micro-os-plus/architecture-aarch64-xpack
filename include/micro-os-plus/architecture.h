@@ -20,12 +20,10 @@
 // #include <micro-os-plus/architecture-aarch64/declarations.h>
 
 #include <micro-os-plus/architecture-aarch64/instructions.h>
-#include <micro-os-plus/architecture-aarch64/instructions-inlines.h>
 
 #include <micro-os-plus/architecture-aarch64/registers.h>
-#include <micro-os-plus/architecture-aarch64/registers-inlines.h>
 
-#include <micro-os-plus/architecture-aarch64/semihosting-inlines.h>
+#include <micro-os-plus/architecture-aarch64/inlines/semihosting-inlines.h>
 
 // ----------------------------------------------------------------------------
 
