@@ -14,7 +14,7 @@
 
 // ----------------------------------------------------------------------------
 
-#include <micro-os-plus/architecture-aarch64/defines.h>
+#include "micro-os-plus/architecture-aarch64/defines.h"
 
 #include <stdint.h>
 
@@ -135,7 +135,7 @@ namespace micro_os_plus::architecture
 // ============================================================================
 // Templates, inlines & constexpr implementations.
 
-#include <micro-os-plus/architecture-aarch64/inlines/instructions-inlines.h>
+#include "inlines/instructions-inlines.h"
 
 // ----------------------------------------------------------------------------
 

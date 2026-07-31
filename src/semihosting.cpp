@@ -11,7 +11,11 @@
 
 // ----------------------------------------------------------------------------
 
-#include <micro-os-plus/semihosting.h>
+#include "micro-os-plus/semihosting.h"
+
+// ----------------------------------------------------------------------------
+
+#if defined(MICRO_OS_PLUS_SEMIHOSTING_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -44,5 +48,9 @@ micro_os_plus_semihosting_call_host (
   // Angel is respecting the APCS.
   return value;
 }
+
+// ----------------------------------------------------------------------------
+
+#endif // defined(MICRO_OS_PLUS_SEMIHOSTING_ENABLED)
 
 // ----------------------------------------------------------------------------

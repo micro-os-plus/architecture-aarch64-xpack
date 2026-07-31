@@ -9,8 +9,8 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
-#ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_SEMIHOSTING_INLINES_H_
-#define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_SEMIHOSTING_INLINES_H_
+#ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_SEMIHOSTING_INLINES_H_
+#define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_SEMIHOSTING_INLINES_H_
 
 // ----------------------------------------------------------------------------
 
@@ -41,6 +41,6 @@ extern "C"
 
 // ----------------------------------------------------------------------------
 
-#endif // MICRO_OS_PLUS_ARCHITECTURE_AARCH64_SEMIHOSTING_INLINES_H_
+#endif // MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_SEMIHOSTING_INLINES_H_
 
 // ----------------------------------------------------------------------------

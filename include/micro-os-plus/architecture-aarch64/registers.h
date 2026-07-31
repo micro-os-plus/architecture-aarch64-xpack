@@ -14,7 +14,7 @@
 
 // ----------------------------------------------------------------------------
 
-#include <micro-os-plus/architecture-aarch64/defines.h>
+#include "micro-os-plus/architecture-aarch64/defines.h"
 
 #include <stdint.h>
 
@@ -95,7 +95,7 @@ namespace micro_os_plus::architecture::registers
 // ============================================================================
 // Templates, inlines & constexpr implementations.
 
-#include <micro-os-plus/architecture-aarch64/inlines/registers-inlines.h>
+#include "inlines/registers-inlines.h"
 
 // ----------------------------------------------------------------------------
 
