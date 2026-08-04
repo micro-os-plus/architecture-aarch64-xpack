@@ -6,8 +6,14 @@ Please check
 [GitHub](https://github.com/micro-os-plus/architecture-aarch64-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2026-08-04
+
+* v4.0.0
+* 95f0e61 re-generate top commons
+
 ## 2026-07-31
 
+* 2f1b98e CHANGELOG update
 * 72cac7f re-generate top xcdl
 * 88d71c5 xcdl-package.json update
 * 2c0c19d re-generate top commons
