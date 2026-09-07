@@ -37,6 +37,7 @@
 
 #include "micro-os-plus/architecture-aarch64/defines.h"
 #include "micro-os-plus/architecture-aarch64/types.h"
+#include "micro-os-plus/architecture-aarch64/functions.h"
 #include "micro-os-plus/architecture-aarch64/instructions.h"
 #include "micro-os-plus/architecture-aarch64/registers.h"
 
