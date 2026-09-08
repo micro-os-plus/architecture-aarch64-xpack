@@ -36,12 +36,17 @@
 // ----------------------------------------------------------------------------
 
 #include "micro-os-plus/architecture-aarch64/defines.h"
+
+#if !defined(__ASSEMBLY__)
+
 #include "micro-os-plus/architecture-aarch64/types.h"
 #include "micro-os-plus/architecture-aarch64/functions.h"
 #include "micro-os-plus/architecture-aarch64/instructions.h"
 #include "micro-os-plus/architecture-aarch64/registers.h"
 
 #include "micro-os-plus/architecture-aarch64/inlines/semihosting-inlines.h"
+
+#endif // !defined(__ASSEMBLY__)
 
 // ----------------------------------------------------------------------------
 
