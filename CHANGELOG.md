@@ -6,9 +6,30 @@ Please check
 [GitHub](https://github.com/micro-os-plus/architecture-aarch64-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2026-09-09
+
+* v4.1.0
+* c7c2f8b re-format
+
+## 2026-09-08
+
+* b00a4c6 architecture.h __ASSEMBLY__
+* bf5a452 add micro_os_plus_semihosting_register_t
+
+## 2026-09-07
+
+* 36424f1 cosmetics xpm packages
+* 1861f7f add show-cpuid
+
+## 2026-08-05
+
+* bcc4058 readme cosmetics
+
 ## 2026-08-04
 
-* v4.0.0
+* defb1d3 4.0.0
+* 5b5b67a README update
+* 340aa2b prepare v4.0.0
 * 95f0e61 re-generate top commons
 
 ## 2026-07-31
