@@ -68,6 +68,32 @@ extern "C"
   }
 
   static inline __attribute__ ((always_inline)) void
+  aarch64_architecture_dsb (void)
+  {
+    __asm__ volatile (
+
+        " dsb sy "
+
+        : /* Outputs */
+        : /* Inputs */
+        : "memory" /* Clobbers */
+    );
+  }
+
+  static inline __attribute__ ((always_inline)) void
+  aarch64_architecture_isb (void)
+  {
+    __asm__ volatile (
+
+        " isb "
+
+        : /* Outputs */
+        : /* Inputs */
+        : "memory" /* Clobbers */
+    );
+  }
+
+  static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_nop (void)
   {
     aarch64_architecture_nop ();
@@ -89,6 +115,24 @@ extern "C"
   micro_os_plus_architecture_wfi (void)
   {
     aarch64_architecture_wfi ();
+  }
+
+  /**
+   * Data synchronisation barrier (`dsb sy`).
+   */
+  static inline __attribute__ ((always_inline)) void
+  micro_os_plus_architecture_data_barrier (void)
+  {
+    aarch64_architecture_dsb ();
+  }
+
+  /**
+   * Instruction synchronisation barrier (`isb`).
+   */
+  static inline __attribute__ ((always_inline)) void
+  micro_os_plus_architecture_instruction_barrier (void)
+  {
+    aarch64_architecture_isb ();
   }
 
   // --------------------------------------------------------------------------
@@ -123,6 +167,18 @@ namespace aarch64::architecture
     aarch64_architecture_wfi ();
   }
 
+  inline __attribute__ ((always_inline)) void
+  dsb (void)
+  {
+    aarch64_architecture_dsb ();
+  }
+
+  inline __attribute__ ((always_inline)) void
+  isb (void)
+  {
+    aarch64_architecture_isb ();
+  }
+
   // --------------------------------------------------------------------------
 } // namespace aarch64::architecture
 
@@ -146,6 +202,18 @@ namespace micro_os_plus::architecture
   wfi (void)
   {
     aarch64::architecture::wfi ();
+  }
+
+  inline __attribute__ ((always_inline)) void
+  data_barrier (void)
+  {
+    aarch64::architecture::dsb ();
+  }
+
+  inline __attribute__ ((always_inline)) void
+  instruction_barrier (void)
+  {
+    aarch64::architecture::isb ();
   }
 
   // --------------------------------------------------------------------------
