@@ -22,8 +22,9 @@
  * `micro-os-plus/architecture-aarch64` folder; otherwise it defines
  * nothing.
  *
- * When included from assembly sources (`__ASSEMBLY__` defined), only the
- * definitions usable from assembly are included.
+ * When included from assembly sources (`__ASSEMBLER__`, defined by the
+ * compiler when preprocessing `.S` files), only the definitions usable
+ * from assembly are included.
  *
  * C++ sources require C++20 or later.
  */
