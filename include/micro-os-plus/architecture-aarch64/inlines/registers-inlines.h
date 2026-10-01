@@ -17,7 +17,7 @@
 #include <stdint.h>
 
 // ----------------------------------------------------------------------------
-// Inline implementations for the AArch64 architecture instructions.
+// Inline implementations for the AArch64 architecture registers.
 
 #if defined(__cplusplus)
 extern "C"
@@ -27,13 +27,13 @@ extern "C"
   // --------------------------------------------------------------------------
 
   static inline __attribute__ ((always_inline)) aarch64_architecture_register_t
-  aarch64_architecture_get_msp (void)
+  aarch64_architecture_get_sp (void)
   {
-    uint32_t result;
+    aarch64_architecture_register_t result;
 
     __asm__ volatile (
 
-        "msr %0, msp"
+        " mov %0, sp "
 
         : "=r"(result) /* Outputs */
         : /* Inputs */
@@ -47,7 +47,7 @@ extern "C"
       __attribute__ ((always_inline)) micro_os_plus_architecture_register_t
       micro_os_plus_architecture_get_sp (void)
   {
-    return aarch64_architecture_get_msp ();
+    return aarch64_architecture_get_sp ();
   }
 
   // --------------------------------------------------------------------------
@@ -65,9 +65,9 @@ namespace aarch64::architecture::registers
   // --------------------------------------------------------------------------
 
   inline __attribute__ ((always_inline)) register_t
-  msp (void)
+  sp (void)
   {
-    return aarch64_architecture_get_msp ();
+    return aarch64_architecture_get_sp ();
   }
 
   // --------------------------------------------------------------------------

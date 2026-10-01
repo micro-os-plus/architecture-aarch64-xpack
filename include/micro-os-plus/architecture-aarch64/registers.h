@@ -9,17 +9,18 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
-#ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INSTRUCTIONS_H_
-#define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INSTRUCTIONS_H_
+#ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_REGISTERS_H_
+#define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_REGISTERS_H_
 
 // ----------------------------------------------------------------------------
 
 #include "micro-os-plus/architecture-aarch64/defines.h"
+#include "micro-os-plus/architecture-aarch64/types.h"
 
 #include <stdint.h>
 
 // ----------------------------------------------------------------------------
-// Declarations of AArch64 functions to wrap architecture instructions.
+// Declarations of AArch64 functions to access architecture registers.
 
 #if defined(__cplusplus)
 extern "C"
@@ -30,18 +31,33 @@ extern "C"
   // Architecture registers getters and mutators in C.
 
   /**
-   * Main Stack Pointer getter.
+   * @brief Get the current stack pointer.
+   *
+   * @details
+   * Returns the value of the stack pointer selected for the current
+   * exception level (`SP_EL0` or `SP_ELx`, depending on `SPSel`),
+   * as seen by the calling code. The value is read with
+   * `mov <Xd>, sp`, since `sp` cannot be used directly as the source
+   * of most other instructions.
+   *
+   * @return The 64-bit value of the current stack pointer.
    */
   static aarch64_architecture_register_t
-  aarch64_architecture_get_msp (void);
+  aarch64_architecture_get_sp (void);
 
   // TODO: add setter.
 
   // --------------------------------------------------------------------------
-  // Portable architecture assembly instructions in C.
+  // Portable architecture registers getters and mutators in C.
 
   /**
-   * Stack Pointer getter.
+   * @brief Get the current stack pointer.
+   *
+   * @details
+   * The portable name, shared with the other µOS++ architectures;
+   * on AArch64 it forwards to `aarch64_architecture_get_sp()`.
+   *
+   * @return The value of the current stack pointer.
    */
   static micro_os_plus_architecture_register_t
   micro_os_plus_architecture_get_sp (void);
@@ -64,10 +80,15 @@ namespace aarch64::architecture::registers
   // Architecture getters in C++.
 
   /**
-   * Main Stack Pointer getter.
+   * @brief Get the current stack pointer.
+   *
+   * @details
+   * The C++ equivalent of `aarch64_architecture_get_sp()`.
+   *
+   * @return The 64-bit value of the current stack pointer.
    */
   register_t
-  msp (void);
+  sp (void);
 
   // TODO: add setter.
 
@@ -77,10 +98,15 @@ namespace aarch64::architecture::registers
 namespace micro_os_plus::architecture::registers
 {
   // --------------------------------------------------------------------------
-  // Portable architecture assembly instructions in C++.
+  // Portable architecture getters in C++.
 
   /**
-   * Main Stack Pointer getter.
+   * @brief Get the current stack pointer.
+   *
+   * @details
+   * The C++ equivalent of `micro_os_plus_architecture_get_sp()`.
+   *
+   * @return The value of the current stack pointer.
    */
   register_t
   sp (void);
@@ -99,6 +125,6 @@ namespace micro_os_plus::architecture::registers
 
 // ----------------------------------------------------------------------------
 
-#endif // MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INSTRUCTIONS_H_
+#endif // MICRO_OS_PLUS_ARCHITECTURE_AARCH64_REGISTERS_H_
 
 // ----------------------------------------------------------------------------
