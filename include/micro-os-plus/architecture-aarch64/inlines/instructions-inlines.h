@@ -69,7 +69,7 @@ extern "C"
 
         : /* Outputs */
         : /* Inputs */
-        : /* Clobbers */
+        : "memory" /* Clobbers */
     );
   }
 
