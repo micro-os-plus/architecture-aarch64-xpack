@@ -30,8 +30,7 @@
 
 // ----------------------------------------------------------------------------
 
-// No guard is needed; there can be only one architecture in a build.
-// #if defined(MICRO_OS_PLUS_INCLUDE_ARCHITECTURES_AARCH64_ENABLED)
+#if defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -50,7 +49,7 @@
 
 // ----------------------------------------------------------------------------
 
-// #endif // defined(MICRO_OS_PLUS_INCLUDE_ARCHITECTURES_AARCH64_ENABLED)
+#endif // defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED)
 
 // ----------------------------------------------------------------------------
 
