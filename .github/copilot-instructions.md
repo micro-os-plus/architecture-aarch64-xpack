@@ -62,11 +62,17 @@ folder, and add corresponding entries in the top CMake and Meson configurations.
 
 ## Testing
 
-After making changes, run in a terminal:
+This project has no test suite of its own yet (`tests/` is a placeholder);
+the code is exercised by the dependent µOS++ projects that run on QEMU
+AArch64.
 
-- `xpm run test -C tests` to execute the test with the system compiler
-- `xpm run test-native-clang -C tests` to execute the test with clang
-- `xpm run test-qemu-cortex-m7f-gcc -C tests` to execute the test with cross gcc
+After making changes to the headers or sources, at least check that they
+compile with an AArch64 cross compiler, for example:
+
+- `aarch64-none-elf-gcc -std=c++20 -fsyntax-only -Iinclude
+  -DMICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED -x c++ <file>`
+- the same with `clang --target=aarch64-none-elf`, and with `-x c`
+  for the C interface.
 
 ## Code Review
 
