@@ -43,11 +43,31 @@ extern "C"
     return result;
   }
 
+  static inline __attribute__ ((always_inline)) void
+  aarch64_architecture_set_sp (aarch64_architecture_register_t top_of_stack)
+  {
+    __asm__ volatile (
+
+        " mov sp, %0 "
+
+        : /* Outputs */
+        : "r"(top_of_stack) /* Inputs */
+        : "memory" /* Clobbers */
+    );
+  }
+
   static inline
       __attribute__ ((always_inline)) micro_os_plus_architecture_register_t
       micro_os_plus_architecture_get_sp (void)
   {
     return aarch64_architecture_get_sp ();
+  }
+
+  static inline __attribute__ ((always_inline)) void
+  micro_os_plus_architecture_set_sp (
+      micro_os_plus_architecture_register_t top_of_stack)
+  {
+    aarch64_architecture_set_sp (top_of_stack);
   }
 
   // --------------------------------------------------------------------------
@@ -70,6 +90,12 @@ namespace aarch64::architecture::registers
     return aarch64_architecture_get_sp ();
   }
 
+  inline __attribute__ ((always_inline)) void
+  sp (register_t top_of_stack)
+  {
+    aarch64_architecture_set_sp (top_of_stack);
+  }
+
   // --------------------------------------------------------------------------
 } // namespace aarch64::architecture::registers
 
@@ -81,6 +107,12 @@ namespace micro_os_plus::architecture::registers
   sp (void)
   {
     return micro_os_plus_architecture_get_sp ();
+  }
+
+  inline __attribute__ ((always_inline)) void
+  sp (register_t top_of_stack)
+  {
+    micro_os_plus_architecture_set_sp (top_of_stack);
   }
 
   // --------------------------------------------------------------------------
