@@ -45,10 +45,8 @@ extern "C"
    * is copied with `mov` (an alias of `add <Xd>, sp, #0`). The statement is
    * `volatile`, so that it is not merged or moved, since the stack pointer
    * changes during execution.
-   *
-   * @return The 64-bit value of the current stack pointer.
    */
-  static inline __attribute__ ((always_inline)) aarch64_architecture_register_t
+  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE aarch64_architecture_register_t
   aarch64_architecture_get_sp (void)
   {
     aarch64_architecture_register_t result;
@@ -69,10 +67,8 @@ extern "C"
    * @details
    * The `"memory"` clobber prevents the compiler from moving memory
    * accesses across the change of the stack pointer.
-   *
-   * @param top_of_stack The new value of the stack pointer.
    */
-  static inline __attribute__ ((always_inline)) void
+  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
   aarch64_architecture_set_sp (aarch64_architecture_register_t top_of_stack)
   {
     __asm__ volatile (
@@ -88,12 +84,10 @@ extern "C"
   /**
    * @details
    * Forwards to `aarch64_architecture_get_sp()`.
-   *
-   * @return The value of the current stack pointer.
    */
-  static inline
-      __attribute__ ((always_inline)) micro_os_plus_architecture_register_t
-      micro_os_plus_architecture_get_sp (void)
+  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE
+  micro_os_plus_architecture_register_t
+  micro_os_plus_architecture_get_sp (void)
   {
     return aarch64_architecture_get_sp ();
   }
@@ -101,10 +95,8 @@ extern "C"
   /**
    * @details
    * Forwards to `aarch64_architecture_set_sp()`.
-   *
-   * @param top_of_stack The new value of the stack pointer.
    */
-  static inline __attribute__ ((always_inline)) void
+  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
   micro_os_plus_architecture_set_sp (
       micro_os_plus_architecture_register_t top_of_stack)
   {
@@ -129,7 +121,7 @@ namespace aarch64::architecture::registers
    * @details
    * Forwards to `aarch64_architecture_get_sp()`.
    */
-  [[nodiscard]] inline __attribute__ ((always_inline)) register_t
+  [[nodiscard]] MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE register_t
   sp (void) noexcept
   {
     return aarch64_architecture_get_sp ();
@@ -139,7 +131,7 @@ namespace aarch64::architecture::registers
    * @details
    * Forwards to `aarch64_architecture_set_sp()`.
    */
-  inline __attribute__ ((always_inline)) void
+  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
   sp (register_t top_of_stack) noexcept
   {
     aarch64_architecture_set_sp (top_of_stack);
@@ -156,7 +148,7 @@ namespace micro_os_plus::architecture::registers
    * @details
    * Forwards to `micro_os_plus_architecture_get_sp()`.
    */
-  [[nodiscard]] inline __attribute__ ((always_inline)) register_t
+  [[nodiscard]] MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE register_t
   sp (void) noexcept
   {
     return micro_os_plus_architecture_get_sp ();
@@ -166,7 +158,7 @@ namespace micro_os_plus::architecture::registers
    * @details
    * Forwards to `micro_os_plus_architecture_set_sp()`.
    */
-  inline __attribute__ ((always_inline)) void
+  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
   sp (register_t top_of_stack) noexcept
   {
     micro_os_plus_architecture_set_sp (top_of_stack);
