@@ -3,13 +3,13 @@
   "minimumXcdlRequired": "2.0.0",
   "license": "MIT",
   "copyright": "Copyright (c) 2022-2026 Liviu Ionescu. All rights reserved.",
-  "description": "Top architecture aarch64 components",
+  "description": "Top architecture AArch64 components",
   "cdlComponents": [
     {
       "id": "micro-os-plus.architectures.aarch64",
       "alias": "micro-os-plus.architecture",
-      "display": "AArch64 architecture",
-      "description": "The AArch64 architecture definitions",
+      "display": "AArch64 (Cortex-A) architecture",
+      "description": "The AArch64 architecture definitions, for 64-bit Cortex-A devices",
       "publicIncludeFolders": [
         "include"
       ],
@@ -29,7 +29,7 @@
         "type": "c-header",
         "filePath": "{{buildFolderPath}}/generated/include/micro-os-plus/architecture-defines.h"
       },
-      // "defaultDefine": "MICRO_OS_PLUS_INCLUDE_ARCHITECTURES_AARCH64_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED"
     }
   ]
 }

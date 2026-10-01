@@ -1,7 +1,7 @@
 {
   "name": "@micro-os-plus/architecture-aarch64",
   "version": "4.1.0",
-  "description": "A source code library with the µOS++ Arm AArch64 architecture",
+  "description": "A source code library with the µOS++ architecture definitions for Arm AArch64 (64-bit Cortex-A)",
   "keywords": [
     "xpack",
     "c++",

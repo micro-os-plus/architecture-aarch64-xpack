@@ -26,7 +26,7 @@
 
 # -----------------------------------------------------------------------------
 
-# A source code library with the µOS++ Arm AArch64 architecture.
+# A source code library with the µOS++ architecture definitions for Arm AArch64 (64-bit Cortex-A).
 message('Processing xpm package @micro-os-plus/architecture-aarch64...')
 
 # -----------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 # -----------------------------------------------------------------------------
-# DO NOT EDIT! Automatically generated from template file: xcdl-package.jsonc
+# DO NOT EDIT! Automatically generated from template file:
+# xcdl-package.jsonc
 #
 # This file is part of the µOS++ project (https://micro-os-plus.github.io/).
 # Copyright (c) 2021-2026 Liviu Ionescu. All rights reserved.
@@ -28,7 +29,7 @@
 cmake_minimum_required (VERSION 3.20)
 project (
   micro-os-plus-architecture-aarch64
-  DESCRIPTION "A source code library with the µOS++ Arm AArch64 architecture"
+  DESCRIPTION "A source code library with the µOS++ architecture definitions for Arm AArch64 (64-bit Cortex-A)"
   LANGUAGES C CXX ASM
 )
 
@@ -40,9 +41,8 @@ if (COMMAND xpack_get_package_name_and_version)
   xpack_get_package_name_and_version (
     "${CMAKE_CURRENT_SOURCE_DIR}/package.json"
   )
-  message (
-    VERBOSE
-    "Processing xpm package ${PACKAGE_JSON_NAME}@${PACKAGE_JSON_VERSION}..."
+  message (VERBOSE
+           "Processing xpm package ${PACKAGE_JSON_NAME}@${PACKAGE_JSON_VERSION}..."
   )
 endif ()
 
@@ -61,20 +61,23 @@ endif ()
 # read-only; properties must be set on the underlying target, not on the alias
 # itself.
 
+
+
 # https://cmake.org/cmake/help/v3.20/command/add_library.html?highlight=interface#interface-libraries
 # Visibility keywords: PRIVATE applies to the target itself; INTERFACE passes
 # properties up to targets that link against it; PUBLIC does both.
-add_library (
-  micro-os-plus-architectures-aarch64-interface INTERFACE EXCLUDE_FROM_ALL
-)
+add_library (micro-os-plus-architectures-aarch64-interface INTERFACE EXCLUDE_FROM_ALL)
 
 target_include_directories (
-  micro-os-plus-architectures-aarch64-interface INTERFACE "include"
+  micro-os-plus-architectures-aarch64-interface 
+  INTERFACE "include"
 )
 
 target_sources (
   micro-os-plus-architectures-aarch64-interface
-  INTERFACE "src/_init_fini.c" "src/semihosting.cpp" "src/show-cpuid.cpp"
+  INTERFACE "src/_init_fini.c"
+            "src/semihosting.cpp"
+            "src/show-cpuid.cpp"
 )
 
 if (COMMAND xpack_display_target_lists)
@@ -86,8 +89,7 @@ endif ()
 
 # https://cmake.org/cmake/help/v3.20/command/add_library.html#alias-libraries
 add_library (
-  micro-os-plus::architectures-aarch64 ALIAS
-  micro-os-plus-architectures-aarch64-interface
+  micro-os-plus::architectures-aarch64 ALIAS micro-os-plus-architectures-aarch64-interface
 )
 message (
   VERBOSE
@@ -95,8 +97,7 @@ message (
 )
 
 add_library (
-  micro-os-plus::architecture ALIAS
-  micro-os-plus-architectures-aarch64-interface
+  micro-os-plus::architecture ALIAS micro-os-plus-architectures-aarch64-interface
 )
 message (
   VERBOSE
