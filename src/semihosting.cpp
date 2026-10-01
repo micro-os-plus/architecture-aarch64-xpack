@@ -83,8 +83,9 @@ micro_os_plus_semihosting_call_host (
   // address in x1, and returns the result in x0. Binding the operands
   // directly to these registers (GNU explicit register variables, still
   // valid in C++17 and later) avoids the extra moves the compiler would
-  // otherwise generate. x1 is also declared as an in/out operand, so
-  // that the compiler conservatively does not assume it is preserved.
+  // otherwise generate. x1 must be an in/out operand, since the
+  // specification allows operations to return information in it (for
+  // example, SYS_ELAPSED sets it to -1 on failure).
   register micro_os_plus_semihosting_response_t value __asm__ ("x0") = reason;
   register micro_os_plus_semihosting_param_block_t* param __asm__ ("x1") = arg;
 
@@ -97,10 +98,11 @@ micro_os_plus_semihosting_call_host (
       : "x2", "x3", "x17", "x30", "memory", "cc" /* Clobbers */
   );
 
-  // The specification states that all registers other than x0 are
-  // preserved, so the clobbers beyond x0 and x1 are defensive only.
-  // The `memory` clobber is required, since the host may read or write
-  // any buffer referred to by the parameter block.
+  // The specification defines only x0 and x1 as modified, and does not
+  // state whether the other registers are preserved; the additional
+  // clobbers protect against implementations that use them as scratch
+  // registers. The `memory` clobber is required, since the host may read
+  // or write any buffer referred to by the parameter block.
   return value;
 }
 
