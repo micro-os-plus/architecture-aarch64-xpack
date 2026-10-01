@@ -13,14 +13,18 @@
 
 #include "micro-os-plus/architecture.h"
 
-#if __has_include("micro-os-plus/semihosting.h")
-#include "micro-os-plus/semihosting.h"
-#endif // __has_include("micro-os-plus/semihosting.h")
+// ----------------------------------------------------------------------------
+
+#if defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED)
 
 // ----------------------------------------------------------------------------
 
-#if defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED) \
-    && defined(MICRO_OS_PLUS_SEMIHOSTING_ENABLED)
+#if __has_include("micro-os-plus/semihosting.h")
+#include "micro-os-plus/semihosting.h"
+
+// ----------------------------------------------------------------------------
+
+#if defined(MICRO_OS_PLUS_SEMIHOSTING_ENABLED)
 
 // ----------------------------------------------------------------------------
 
@@ -56,6 +60,14 @@ micro_os_plus_semihosting_call_host (
 
 // ----------------------------------------------------------------------------
 
-#endif // defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED) && defined(MICRO_OS_PLUS_SEMIHOSTING_ENABLED)
+#endif // defined(MICRO_OS_PLUS_SEMIHOSTING_ENABLED)
+
+// ----------------------------------------------------------------------------
+
+#endif // __has_include("micro-os-plus/semihosting.h")
+
+// ----------------------------------------------------------------------------
+
+#endif // defined(MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED)
 
 // ----------------------------------------------------------------------------
