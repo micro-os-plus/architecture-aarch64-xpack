@@ -24,10 +24,6 @@
 
 // ----------------------------------------------------------------------------
 
-using namespace micro_os_plus;
-
-// ----------------------------------------------------------------------------
-
 /**
  * @details
  * Currently empty; reading `MIDR_EL1` requires EL1 or higher, and the
