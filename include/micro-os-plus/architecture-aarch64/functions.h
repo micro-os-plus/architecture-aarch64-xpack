@@ -40,8 +40,10 @@ extern "C"
    * is defined; it is not part of the application API, therefore it has
    * no C++ equivalent.
    *
-   * On AArch64 it is currently empty; it does not yet display the
-   * `MIDR_EL1` identification register.
+   * On AArch64 it decodes the `MIDR_EL1` identification register and
+   * writes a line like `Arm Cortex-A53 r0p4` to the trace output
+   * channel. It must be called at EL1 or higher. When the `diag-trace`
+   * package is not available, it is empty.
    */
   void
   micro_os_plus_architecture_show_cpuid (void);
