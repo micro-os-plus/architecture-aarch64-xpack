@@ -129,8 +129,8 @@ namespace aarch64::architecture::registers
    * @details
    * Forwards to `aarch64_architecture_get_sp()`.
    */
-  inline __attribute__ ((always_inline)) register_t
-  sp (void)
+  [[nodiscard]] inline __attribute__ ((always_inline)) register_t
+  sp (void) noexcept
   {
     return aarch64_architecture_get_sp ();
   }
@@ -140,7 +140,7 @@ namespace aarch64::architecture::registers
    * Forwards to `aarch64_architecture_set_sp()`.
    */
   inline __attribute__ ((always_inline)) void
-  sp (register_t top_of_stack)
+  sp (register_t top_of_stack) noexcept
   {
     aarch64_architecture_set_sp (top_of_stack);
   }
@@ -156,8 +156,8 @@ namespace micro_os_plus::architecture::registers
    * @details
    * Forwards to `micro_os_plus_architecture_get_sp()`.
    */
-  inline __attribute__ ((always_inline)) register_t
-  sp (void)
+  [[nodiscard]] inline __attribute__ ((always_inline)) register_t
+  sp (void) noexcept
   {
     return micro_os_plus_architecture_get_sp ();
   }
@@ -167,7 +167,7 @@ namespace micro_os_plus::architecture::registers
    * Forwards to `micro_os_plus_architecture_set_sp()`.
    */
   inline __attribute__ ((always_inline)) void
-  sp (register_t top_of_stack)
+  sp (register_t top_of_stack) noexcept
   {
     micro_os_plus_architecture_set_sp (top_of_stack);
   }

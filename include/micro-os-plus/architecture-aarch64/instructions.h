@@ -224,7 +224,7 @@ namespace aarch64::architecture
    * timing delays.
    */
   void
-  nop (void);
+  nop (void) noexcept;
 
   /**
    * @brief Execute a `brk #0` instruction.
@@ -236,7 +236,7 @@ namespace aarch64::architecture
    * compiler memory barrier.
    */
   void
-  brk (void);
+  brk (void) noexcept;
 
   /**
    * @brief Execute a `brk #0` instruction (deprecated name).
@@ -246,7 +246,7 @@ namespace aarch64::architecture
    * AArch32/Cortex-M mnemonic. Use `brk()`.
    */
   [[deprecated ("use brk()")]] void
-  bkpt (void);
+  bkpt (void) noexcept;
 
   /**
    * @brief Execute a `wfi` instruction.
@@ -257,7 +257,7 @@ namespace aarch64::architecture
    * acts as a compiler memory barrier, but not as a hardware barrier.
    */
   void
-  wfi (void);
+  wfi (void) noexcept;
 
   /**
    * @brief Execute a `dsb sy` instruction.
@@ -268,7 +268,7 @@ namespace aarch64::architecture
    * memory barrier.
    */
   void
-  dsb (void);
+  dsb (void) noexcept;
 
   /**
    * @brief Execute an `isb` instruction.
@@ -278,7 +278,7 @@ namespace aarch64::architecture
    * Synchronisation Barrier); it also acts as a compiler memory barrier.
    */
   void
-  isb (void);
+  isb (void) noexcept;
 
   // --------------------------------------------------------------------------
 } // namespace aarch64::architecture
@@ -296,7 +296,7 @@ namespace micro_os_plus::architecture
    * all µOS++ architectures; on AArch64, it executes a `nop` instruction.
    */
   void
-  nop (void);
+  nop (void) noexcept;
 
   /**
    * @brief Enter the debugger.
@@ -307,7 +307,7 @@ namespace micro_os_plus::architecture
    * instruction.
    */
   void
-  brk (void);
+  brk (void) noexcept;
 
   /**
    * @brief Wait for an interrupt.
@@ -317,7 +317,7 @@ namespace micro_os_plus::architecture
    * all µOS++ architectures; on AArch64, it executes a `wfi` instruction.
    */
   void
-  wfi (void);
+  wfi (void) noexcept;
 
   /**
    * @brief Data synchronisation barrier.
@@ -327,7 +327,7 @@ namespace micro_os_plus::architecture
    * on AArch64, it is implemented with the `dsb sy` instruction.
    */
   void
-  data_barrier (void);
+  data_barrier (void) noexcept;
 
   /**
    * @brief Instruction synchronisation barrier.
@@ -338,7 +338,7 @@ namespace micro_os_plus::architecture
    * it is implemented with the `isb` instruction.
    */
   void
-  instruction_barrier (void);
+  instruction_barrier (void) noexcept;
 
   // --------------------------------------------------------------------------
 } // namespace micro_os_plus::architecture

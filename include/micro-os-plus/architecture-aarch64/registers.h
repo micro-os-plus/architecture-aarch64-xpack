@@ -136,8 +136,8 @@ namespace aarch64::architecture::registers
    *
    * @return The 64-bit value of the current stack pointer.
    */
-  register_t
-  sp (void);
+  [[nodiscard]] register_t
+  sp (void) noexcept;
 
   /**
    * @brief Set the current stack pointer.
@@ -149,7 +149,7 @@ namespace aarch64::architecture::registers
    * @param top_of_stack The new value of the stack pointer.
    */
   void
-  sp (register_t top_of_stack);
+  sp (register_t top_of_stack) noexcept;
 
   // --------------------------------------------------------------------------
 } // namespace aarch64::architecture::registers
@@ -167,8 +167,8 @@ namespace micro_os_plus::architecture::registers
    *
    * @return The value of the current stack pointer.
    */
-  register_t
-  sp (void);
+  [[nodiscard]] register_t
+  sp (void) noexcept;
 
   /**
    * @brief Set the current stack pointer.
@@ -180,7 +180,7 @@ namespace micro_os_plus::architecture::registers
    * @param top_of_stack The new value of the stack pointer.
    */
   void
-  sp (register_t top_of_stack);
+  sp (register_t top_of_stack) noexcept;
 
   // --------------------------------------------------------------------------
 } // namespace micro_os_plus::architecture::registers

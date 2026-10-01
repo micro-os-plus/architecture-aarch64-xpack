@@ -214,7 +214,7 @@ namespace aarch64::architecture
    * Forwards to `aarch64_architecture_nop()`.
    */
   inline __attribute__ ((always_inline)) void
-  nop (void)
+  nop (void) noexcept
   {
     aarch64_architecture_nop ();
   }
@@ -224,7 +224,7 @@ namespace aarch64::architecture
    * Forwards to `aarch64_architecture_brk()`.
    */
   inline __attribute__ ((always_inline)) void
-  brk (void)
+  brk (void) noexcept
   {
     aarch64_architecture_brk ();
   }
@@ -234,7 +234,7 @@ namespace aarch64::architecture
    * Forwards to `brk()`.
    */
   inline __attribute__ ((always_inline)) void
-  bkpt (void)
+  bkpt (void) noexcept
   {
     brk ();
   }
@@ -244,7 +244,7 @@ namespace aarch64::architecture
    * Forwards to `aarch64_architecture_wfi()`.
    */
   inline __attribute__ ((always_inline)) void
-  wfi (void)
+  wfi (void) noexcept
   {
     aarch64_architecture_wfi ();
   }
@@ -254,7 +254,7 @@ namespace aarch64::architecture
    * Forwards to `aarch64_architecture_dsb()`.
    */
   inline __attribute__ ((always_inline)) void
-  dsb (void)
+  dsb (void) noexcept
   {
     aarch64_architecture_dsb ();
   }
@@ -264,7 +264,7 @@ namespace aarch64::architecture
    * Forwards to `aarch64_architecture_isb()`.
    */
   inline __attribute__ ((always_inline)) void
-  isb (void)
+  isb (void) noexcept
   {
     aarch64_architecture_isb ();
   }
@@ -281,7 +281,7 @@ namespace micro_os_plus::architecture
    * Forwards to `aarch64::architecture::nop()`.
    */
   inline __attribute__ ((always_inline)) void
-  nop (void)
+  nop (void) noexcept
   {
     aarch64::architecture::nop ();
   }
@@ -291,7 +291,7 @@ namespace micro_os_plus::architecture
    * Forwards to `aarch64::architecture::brk()`.
    */
   inline __attribute__ ((always_inline)) void
-  brk (void)
+  brk (void) noexcept
   {
     aarch64::architecture::brk ();
   }
@@ -301,7 +301,7 @@ namespace micro_os_plus::architecture
    * Forwards to `aarch64::architecture::wfi()`.
    */
   inline __attribute__ ((always_inline)) void
-  wfi (void)
+  wfi (void) noexcept
   {
     aarch64::architecture::wfi ();
   }
@@ -311,7 +311,7 @@ namespace micro_os_plus::architecture
    * Forwards to `aarch64::architecture::dsb()`.
    */
   inline __attribute__ ((always_inline)) void
-  data_barrier (void)
+  data_barrier (void) noexcept
   {
     aarch64::architecture::dsb ();
   }
@@ -321,7 +321,7 @@ namespace micro_os_plus::architecture
    * Forwards to `aarch64::architecture::isb()`.
    */
   inline __attribute__ ((always_inline)) void
-  instruction_barrier (void)
+  instruction_barrier (void) noexcept
   {
     aarch64::architecture::isb ();
   }
