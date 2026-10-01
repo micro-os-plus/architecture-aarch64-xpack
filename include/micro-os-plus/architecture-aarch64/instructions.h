@@ -36,9 +36,23 @@ extern "C"
   aarch64_architecture_nop (void);
 
   /**
-   * `bkpt` instruction.
+   * @brief Software breakpoint.
+   *
+   * @details
+   * Issues the `brk #0` instruction, the encoding used by GDB for
+   * AArch64 software breakpoints.
    */
   static void
+  aarch64_architecture_brk (void);
+
+  /**
+   * @brief Software breakpoint (deprecated name).
+   *
+   * @details
+   * Kept for compatibility with earlier releases; `bkpt` is the
+   * AArch32/Cortex-M mnemonic. Use `aarch64_architecture_brk()`.
+   */
+  __attribute__ ((deprecated ("use aarch64_architecture_brk()"))) static void
   aarch64_architecture_bkpt (void);
 
   /**
@@ -69,7 +83,11 @@ extern "C"
   micro_os_plus_architecture_nop (void);
 
   /**
-   * `break` instruction.
+   * @brief Software breakpoint.
+   *
+   * @details
+   * The portable name, shared with the other µOS++ architectures;
+   * on AArch64 it issues the `brk #0` instruction.
    */
   static void
   micro_os_plus_architecture_brk (void);
@@ -130,9 +148,23 @@ namespace aarch64::architecture
   nop (void);
 
   /**
-   * The assembler `bkpt` instruction.
+   * @brief Software breakpoint.
+   *
+   * @details
+   * The C++ equivalent of `aarch64_architecture_brk()`; issues the
+   * `brk #0` instruction.
    */
   void
+  brk (void);
+
+  /**
+   * @brief Software breakpoint (deprecated name).
+   *
+   * @details
+   * Kept for compatibility with earlier releases; `bkpt` is the
+   * AArch32/Cortex-M mnemonic. Use `brk()`.
+   */
+  [[deprecated ("use brk()")]] void
   bkpt (void);
 
   /**
@@ -168,7 +200,11 @@ namespace micro_os_plus::architecture
   nop (void);
 
   /**
-   * The assembler `bkpt` instruction.
+   * @brief Software breakpoint.
+   *
+   * @details
+   * The C++ equivalent of `micro_os_plus_architecture_brk()`; on
+   * AArch64 it issues the `brk #0` instruction.
    */
   void
   brk (void);

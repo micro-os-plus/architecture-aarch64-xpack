@@ -40,7 +40,7 @@ extern "C"
   }
 
   static inline __attribute__ ((always_inline)) void
-  aarch64_architecture_bkpt (void)
+  aarch64_architecture_brk (void)
   {
     __asm__ volatile (
 
@@ -52,6 +52,12 @@ extern "C"
         : /* Inputs */
         : /* Clobbers */
     );
+  }
+
+  static inline __attribute__ ((always_inline)) void
+  aarch64_architecture_bkpt (void)
+  {
+    aarch64_architecture_brk ();
   }
 
   static inline __attribute__ ((always_inline)) void
@@ -105,7 +111,7 @@ extern "C"
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_brk (void)
   {
-    aarch64_architecture_bkpt ();
+    aarch64_architecture_brk ();
   }
 
   /**
@@ -156,9 +162,15 @@ namespace aarch64::architecture
   }
 
   inline __attribute__ ((always_inline)) void
+  brk (void)
+  {
+    aarch64_architecture_brk ();
+  }
+
+  inline __attribute__ ((always_inline)) void
   bkpt (void)
   {
-    aarch64_architecture_bkpt ();
+    brk ();
   }
 
   inline __attribute__ ((always_inline)) void
@@ -195,7 +207,7 @@ namespace micro_os_plus::architecture
   inline __attribute__ ((always_inline)) void
   brk (void)
   {
-    aarch64::architecture::bkpt ();
+    aarch64::architecture::brk ();
   }
 
   inline __attribute__ ((always_inline)) void
