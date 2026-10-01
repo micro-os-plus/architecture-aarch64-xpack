@@ -9,6 +9,19 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief Inline definitions of the AArch64 functions accessing CPU
+ * registers.
+ *
+ * @details
+ * The architecture specific C functions contain the inline assembly; all
+ * the other forms forward to them.
+ *
+ * This file is included at the end of `registers.h` and must not be
+ * included directly.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_REGISTERS_INLINES_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_REGISTERS_INLINES_H_
 
@@ -26,6 +39,15 @@ extern "C"
 
   // --------------------------------------------------------------------------
 
+  /**
+   * @details
+   * `sp` cannot be the source operand of most instructions, therefore it
+   * is copied with `mov` (an alias of `add <Xd>, sp, #0`). The statement is
+   * `volatile`, so that it is not merged or moved, since the stack pointer
+   * changes during execution.
+   *
+   * @return The 64-bit value of the current stack pointer.
+   */
   static inline __attribute__ ((always_inline)) aarch64_architecture_register_t
   aarch64_architecture_get_sp (void)
   {
@@ -43,6 +65,13 @@ extern "C"
     return result;
   }
 
+  /**
+   * @details
+   * The `"memory"` clobber prevents the compiler from moving memory
+   * accesses across the change of the stack pointer.
+   *
+   * @param top_of_stack The new value of the stack pointer.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_set_sp (aarch64_architecture_register_t top_of_stack)
   {
@@ -56,6 +85,12 @@ extern "C"
     );
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_get_sp()`.
+   *
+   * @return The value of the current stack pointer.
+   */
   static inline
       __attribute__ ((always_inline)) micro_os_plus_architecture_register_t
       micro_os_plus_architecture_get_sp (void)
@@ -63,6 +98,12 @@ extern "C"
     return aarch64_architecture_get_sp ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_set_sp()`.
+   *
+   * @param top_of_stack The new value of the stack pointer.
+   */
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_set_sp (
       micro_os_plus_architecture_register_t top_of_stack)
@@ -84,12 +125,20 @@ namespace aarch64::architecture::registers
 {
   // --------------------------------------------------------------------------
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_get_sp()`.
+   */
   inline __attribute__ ((always_inline)) register_t
   sp (void)
   {
     return aarch64_architecture_get_sp ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_set_sp()`.
+   */
   inline __attribute__ ((always_inline)) void
   sp (register_t top_of_stack)
   {
@@ -103,12 +152,20 @@ namespace micro_os_plus::architecture::registers
 {
   // --------------------------------------------------------------------------
 
+  /**
+   * @details
+   * Forwards to `micro_os_plus_architecture_get_sp()`.
+   */
   inline __attribute__ ((always_inline)) register_t
   sp (void)
   {
     return micro_os_plus_architecture_get_sp ();
   }
 
+  /**
+   * @details
+   * Forwards to `micro_os_plus_architecture_set_sp()`.
+   */
   inline __attribute__ ((always_inline)) void
   sp (register_t top_of_stack)
   {

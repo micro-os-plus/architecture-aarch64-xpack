@@ -9,6 +9,17 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief AArch64 type definitions used by the semihosting call.
+ *
+ * @details
+ * The `semihosting` package uses these architecture specific types in
+ * its declarations; the call itself,
+ * `micro_os_plus_semihosting_call_host()`, is implemented in
+ * `src/semihosting.cpp`.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_SEMIHOSTING_INLINES_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_SEMIHOSTING_INLINES_H_
 
@@ -17,7 +28,8 @@
 #include <stdint.h>
 
 // ----------------------------------------------------------------------------
-// Inline implementations for the AArch64 semihosting call.
+// AArch64 type definitions used by the semihosting call; the call itself
+// is implemented in `src/semihosting.cpp`.
 
 #if defined(__cplusplus)
 extern "C"
@@ -26,15 +38,33 @@ extern "C"
 
   // --------------------------------------------------------------------------
 
-  // Type of each entry in structures.
+  /**
+   * @brief Type of each field in the semihosting structures.
+   *
+   * @details
+   * Semihosting structures, such as the heap information block, have
+   * fields of the register size (64 bits on AArch64).
+   */
   typedef micro_os_plus_architecture_register_t
       micro_os_plus_semihosting_register_t;
 
-  // Type of each entry in a parameter block.
+  /**
+   * @brief Type of each entry in a semihosting parameter block.
+   *
+   * @details
+   * The parameter block, passed by address in `x1`, is an array of
+   * 64-bit fields, as defined by the Arm semihosting specification.
+   */
   typedef micro_os_plus_architecture_register_t
       micro_os_plus_semihosting_param_block_t;
 
-  // Type of result.
+  /**
+   * @brief Type of the semihosting call result.
+   *
+   * @details
+   * The result is returned in `x0`; it is signed, since many operations
+   * return -1 on error.
+   */
   typedef micro_os_plus_architecture_signed_register_t
       micro_os_plus_semihosting_response_t;
 

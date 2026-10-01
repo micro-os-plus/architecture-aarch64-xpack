@@ -11,6 +11,11 @@
 
 // ----------------------------------------------------------------------------
 
+/**
+ * @file
+ * @brief AArch64 implementation of the CPU identification display.
+ */
+
 #include "micro-os-plus/architecture.h"
 
 // ----------------------------------------------------------------------------
@@ -23,6 +28,11 @@ using namespace micro_os_plus;
 
 // ----------------------------------------------------------------------------
 
+/**
+ * @details
+ * Currently empty; reading `MIDR_EL1` requires EL1 or higher, and the
+ * output depends on the trace infrastructure.
+ */
 void
 micro_os_plus_architecture_show_cpuid (void)
 {

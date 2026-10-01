@@ -11,6 +11,18 @@
 
 // ----------------------------------------------------------------------------
 
+/**
+ * @file
+ * @brief Weak empty definitions of `_init()` and `_fini()`.
+ *
+ * @details
+ * Newlib references `_fini()` from `__libc_fini_array()` (and, in some
+ * configurations, `_init()` from `__libc_init_array()`); on bare-metal
+ * targets there is no crt code to provide them, so these weak empty
+ * definitions satisfy the linker. The application may override them
+ * with strong definitions.
+ */
+
 #include "micro-os-plus/architecture.h"
 
 // ----------------------------------------------------------------------------
@@ -33,11 +45,25 @@ _fini (void);
 // libg.a(libc_a-fini.o): in function `__libc_fini_array':
 // (.text.__libc_fini_array+0x1c): undefined reference to `_fini'
 
+/**
+ * @brief Run legacy initialisation code.
+ *
+ * @details
+ * Weak empty definition; nothing needs to run before the constructors
+ * on this architecture.
+ */
 __attribute__ ((weak)) void
 _init (void)
 {
 }
 
+/**
+ * @brief Run legacy termination code.
+ *
+ * @details
+ * Weak empty definition, required to resolve the reference from
+ * `__libc_fini_array()`.
+ */
 __attribute__ ((weak)) void
 _fini (void)
 {

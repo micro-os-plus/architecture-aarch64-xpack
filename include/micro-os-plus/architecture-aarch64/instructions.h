@@ -9,6 +9,21 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief Declarations of the AArch64 functions wrapping CPU instructions.
+ *
+ * @details
+ * Each instruction is available in four forms: architecture specific C
+ * functions (`aarch64_architecture_*()`), portable C functions
+ * (`micro_os_plus_architecture_*()`), and the corresponding C++ functions
+ * in the `aarch64::architecture` and `micro_os_plus::architecture`
+ * namespaces. The portable forms are common to all µOS++ architectures.
+ *
+ * All functions are always inlined; their definitions are in
+ * `inlines/instructions-inlines.h`, included at the end of this file.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INSTRUCTIONS_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INSTRUCTIONS_H_
 
@@ -30,23 +45,35 @@ extern "C"
   // Architecture assembly instructions in C.
 
   /**
-   * `nop` instruction.
+   * @brief Execute a `nop` instruction.
+   *
+   * @details
+   * The instruction performs no operation. The architecture does not
+   * guarantee that it takes any time to execute, since it may be removed
+   * from the pipeline, therefore it must not be used for timing delays.
+   *
+   * It is not a compiler barrier.
    */
   static void
   aarch64_architecture_nop (void);
 
   /**
-   * @brief Software breakpoint.
+   * @brief Execute a `brk #0` instruction.
    *
    * @details
-   * Issues the `brk #0` instruction, the encoding used by GDB for
-   * AArch64 software breakpoints.
+   * The instruction generates a synchronous Breakpoint Instruction
+   * exception. `brk #0` is the encoding used by GDB for AArch64 software
+   * breakpoints. If no debugger handles the exception, it is taken by the
+   * application exception handler, which must be prepared for it.
+   *
+   * It also acts as a compiler memory barrier, so that a debugger
+   * stopped at the breakpoint sees all the preceding stores in memory.
    */
   static void
   aarch64_architecture_brk (void);
 
   /**
-   * @brief Software breakpoint (deprecated name).
+   * @brief Execute a `brk #0` instruction (deprecated name).
    *
    * @details
    * Kept for compatibility with earlier releases; `bkpt` is the
@@ -56,19 +83,47 @@ extern "C"
   aarch64_architecture_bkpt (void);
 
   /**
-   * `wfi` instruction.
+   * @brief Execute a `wfi` instruction.
+   *
+   * @details
+   * The instruction suspends execution, possibly entering a low power
+   * state, until a wake-up event, such as an interrupt or a debug event,
+   * occurs. Depending on the system configuration, it may also be
+   * trapped to a higher exception level (for example, at EL0 when
+   * `SCTLR_EL1.nTWI` is 0).
+   *
+   * It also acts as a compiler memory barrier, so that variables changed
+   * by interrupt handlers are read again after it returns. It is not a
+   * hardware barrier; if outstanding memory writes must complete before
+   * entering the low power state, call `aarch64_architecture_dsb()`
+   * first.
    */
   static void
   aarch64_architecture_wfi (void);
 
   /**
-   * `dsb sy` instruction (Data Synchronization Barrier, full system).
+   * @brief Execute a `dsb sy` instruction.
+   *
+   * @details
+   * Data Synchronisation Barrier, full system: no instruction after it
+   * executes until all the explicit memory accesses, cache maintenance
+   * operations, and TLB maintenance operations issued before it complete.
+   *
+   * It also acts as a compiler memory barrier.
    */
   static void
   aarch64_architecture_dsb (void);
 
   /**
-   * `isb` instruction (Instruction Synchronization Barrier).
+   * @brief Execute an `isb` instruction.
+   *
+   * @details
+   * Instruction Synchronisation Barrier: flushes the pipeline, so that
+   * the instructions after it are fetched again, and observe the effects
+   * of the preceding context-changing operations, such as system register
+   * writes. On AArch64 the only option is `sy`, which is the default.
+   *
+   * It also acts as a compiler memory barrier.
    */
   static void
   aarch64_architecture_isb (void);
@@ -77,23 +132,42 @@ extern "C"
   // Portable architecture assembly instructions in C.
 
   /**
-   * `nop` instruction.
+   * @brief Perform no operation.
+   *
+   * @details
+   * Portable wrapper, available on all µOS++ architectures. On AArch64,
+   * it is implemented with the `nop` instruction, which is not guaranteed
+   * to take any time, therefore it must not be used for timing delays.
    */
   static void
   micro_os_plus_architecture_nop (void);
 
   /**
-   * @brief Software breakpoint.
+   * @brief Enter the debugger.
    *
    * @details
-   * The portable name, shared with the other µOS++ architectures;
-   * on AArch64 it issues the `brk #0` instruction.
+   * Portable wrapper, available on all µOS++ architectures. On AArch64,
+   * it is implemented with the `brk #0` instruction, which generates a
+   * Breakpoint Instruction exception; if no debugger handles it, it is
+   * taken by the application exception handler.
+   *
+   * It also acts as a compiler memory barrier.
    */
   static void
   micro_os_plus_architecture_brk (void);
 
   /**
-   * `wfi` instruction.
+   * @brief Wait for an interrupt.
+   *
+   * @details
+   * Portable wrapper, available on all µOS++ architectures. On AArch64,
+   * it is implemented with the `wfi` instruction, which suspends
+   * execution until a wake-up event, such as an interrupt, occurs.
+   *
+   * It also acts as a compiler memory barrier, but not as a hardware
+   * barrier; if outstanding memory writes must complete before entering
+   * the low power state, call `micro_os_plus_architecture_data_barrier()`
+   * first.
    */
   static void
   micro_os_plus_architecture_wfi (void);
@@ -142,23 +216,30 @@ namespace aarch64::architecture
   // Architecture assembly instructions in C++.
 
   /**
-   * The assembler `nop` instruction.
+   * @brief Execute a `nop` instruction.
+   *
+   * @details
+   * C++ equivalent of `aarch64_architecture_nop()`; the instruction is
+   * not guaranteed to take any time, therefore it must not be used for
+   * timing delays.
    */
   void
   nop (void);
 
   /**
-   * @brief Software breakpoint.
+   * @brief Execute a `brk #0` instruction.
    *
    * @details
-   * The C++ equivalent of `aarch64_architecture_brk()`; issues the
-   * `brk #0` instruction.
+   * C++ equivalent of `aarch64_architecture_brk()`; it generates a
+   * Breakpoint Instruction exception, handled by the debugger or, if
+   * none, by the application exception handler. It also acts as a
+   * compiler memory barrier.
    */
   void
   brk (void);
 
   /**
-   * @brief Software breakpoint (deprecated name).
+   * @brief Execute a `brk #0` instruction (deprecated name).
    *
    * @details
    * Kept for compatibility with earlier releases; `bkpt` is the
@@ -168,19 +249,33 @@ namespace aarch64::architecture
   bkpt (void);
 
   /**
-   * The assembler `wfi` instruction.
+   * @brief Execute a `wfi` instruction.
+   *
+   * @details
+   * C++ equivalent of `aarch64_architecture_wfi()`; it suspends
+   * execution until a wake-up event, such as an interrupt, occurs, and
+   * acts as a compiler memory barrier, but not as a hardware barrier.
    */
   void
   wfi (void);
 
   /**
-   * The assembler `dsb sy` (Data Synchronization Barrier) instruction.
+   * @brief Execute a `dsb sy` instruction.
+   *
+   * @details
+   * C++ equivalent of `aarch64_architecture_dsb()` (Data
+   * Synchronisation Barrier, full system); it also acts as a compiler
+   * memory barrier.
    */
   void
   dsb (void);
 
   /**
-   * The assembler `isb` (Instruction Synchronization Barrier) instruction.
+   * @brief Execute an `isb` instruction.
+   *
+   * @details
+   * C++ equivalent of `aarch64_architecture_isb()` (Instruction
+   * Synchronisation Barrier); it also acts as a compiler memory barrier.
    */
   void
   isb (void);
@@ -194,23 +289,32 @@ namespace micro_os_plus::architecture
   // Portable architecture assembly instructions in C++.
 
   /**
-   * The assembler `nop` instruction.
+   * @brief Perform no operation.
+   *
+   * @details
+   * C++ equivalent of `micro_os_plus_architecture_nop()`, available on
+   * all µOS++ architectures; on AArch64, it executes a `nop` instruction.
    */
   void
   nop (void);
 
   /**
-   * @brief Software breakpoint.
+   * @brief Enter the debugger.
    *
    * @details
-   * The C++ equivalent of `micro_os_plus_architecture_brk()`; on
-   * AArch64 it issues the `brk #0` instruction.
+   * C++ equivalent of `micro_os_plus_architecture_brk()`, available on
+   * all µOS++ architectures; on AArch64, it executes a `brk #0`
+   * instruction.
    */
   void
   brk (void);
 
   /**
-   * The assembler `wfi` instruction.
+   * @brief Wait for an interrupt.
+   *
+   * @details
+   * C++ equivalent of `micro_os_plus_architecture_wfi()`, available on
+   * all µOS++ architectures; on AArch64, it executes a `wfi` instruction.
    */
   void
   wfi (void);

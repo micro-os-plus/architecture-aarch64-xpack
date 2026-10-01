@@ -9,6 +9,20 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief Declarations of the AArch64 functions accessing CPU registers.
+ *
+ * @details
+ * As for the instructions, each register accessor is available as
+ * architecture specific and portable C functions, and in the
+ * `aarch64::architecture::registers` and
+ * `micro_os_plus::architecture::registers` C++ namespaces.
+ *
+ * All functions are always inlined; their definitions are in
+ * `inlines/registers-inlines.h`, included at the end of this file.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_REGISTERS_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_REGISTERS_H_
 

@@ -9,6 +9,25 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief Main header of the µOS++ AArch64 architecture package.
+ *
+ * @details
+ * This is the only header applications should include. It first includes
+ * the optional `micro-os-plus/project-config.h` and
+ * `micro-os-plus/architecture-defines.h` configuration headers, then,
+ * only when `MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED` is defined,
+ * includes the internal headers from the
+ * `micro-os-plus/architecture-aarch64` folder; otherwise it defines
+ * nothing.
+ *
+ * When included from assembly sources (`__ASSEMBLY__` defined), only the
+ * definitions usable from assembly are included.
+ *
+ * C++ sources require C++20 or later.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ARCHITECTURE_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ARCHITECTURE_H_
 

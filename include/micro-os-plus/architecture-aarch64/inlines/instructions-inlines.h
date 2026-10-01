@@ -9,6 +9,20 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief Inline definitions of the AArch64 functions wrapping CPU
+ * instructions.
+ *
+ * @details
+ * The architecture specific C functions contain the inline assembly; all
+ * the other forms (portable C, and both C++ namespaces) forward to them,
+ * so that each instruction is written only once.
+ *
+ * This file is included at the end of `instructions.h` and must not be
+ * included directly.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_INSTRUCTIONS_INLINES_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_INLINES_INSTRUCTIONS_INLINES_H_
 
@@ -26,6 +40,12 @@ extern "C"
 
   // --------------------------------------------------------------------------
 
+  /**
+   * @details
+   * The assembly statement is `volatile`, so that it is not removed; it
+   * has no clobbers, since the instruction has no effect on registers or
+   * memory.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_nop (void)
   {
@@ -39,6 +59,13 @@ extern "C"
     );
   }
 
+  /**
+   * @details
+   * The `"memory"` clobber prevents the compiler from moving or
+   * eliminating memory accesses across the breakpoint, so that the
+   * debugger sees all the preceding stores, and the code after it reads
+   * again any values changed from the debugger.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_brk (void)
   {
@@ -54,12 +81,21 @@ extern "C"
     );
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_brk()`.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_bkpt (void)
   {
     aarch64_architecture_brk ();
   }
 
+  /**
+   * @details
+   * The `"memory"` clobber forces the compiler to read again, after the
+   * instruction, any values that interrupt handlers may have changed.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_wfi (void)
   {
@@ -73,6 +109,11 @@ extern "C"
     );
   }
 
+  /**
+   * @details
+   * The `"memory"` clobber makes the hardware barrier also a compiler
+   * barrier, so that memory accesses are not moved across it.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_dsb (void)
   {
@@ -86,6 +127,11 @@ extern "C"
     );
   }
 
+  /**
+   * @details
+   * The `"memory"` clobber makes the hardware barrier also a compiler
+   * barrier, so that memory accesses are not moved across it.
+   */
   static inline __attribute__ ((always_inline)) void
   aarch64_architecture_isb (void)
   {
@@ -99,6 +145,10 @@ extern "C"
     );
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_nop()`.
+   */
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_nop (void)
   {
@@ -106,7 +156,8 @@ extern "C"
   }
 
   /**
-   * `break` instruction.
+   * @details
+   * Forwards to `aarch64_architecture_brk()`.
    */
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_brk (void)
@@ -115,7 +166,8 @@ extern "C"
   }
 
   /**
-   * `wfi` instruction.
+   * @details
+   * Forwards to `aarch64_architecture_wfi()`.
    */
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_wfi (void)
@@ -124,7 +176,8 @@ extern "C"
   }
 
   /**
-   * Data synchronisation barrier (`dsb sy`).
+   * @details
+   * Forwards to `aarch64_architecture_dsb()`.
    */
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_data_barrier (void)
@@ -133,7 +186,8 @@ extern "C"
   }
 
   /**
-   * Instruction synchronisation barrier (`isb`).
+   * @details
+   * Forwards to `aarch64_architecture_isb()`.
    */
   static inline __attribute__ ((always_inline)) void
   micro_os_plus_architecture_instruction_barrier (void)
@@ -155,36 +209,60 @@ namespace aarch64::architecture
 {
   // --------------------------------------------------------------------------
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_nop()`.
+   */
   inline __attribute__ ((always_inline)) void
   nop (void)
   {
     aarch64_architecture_nop ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_brk()`.
+   */
   inline __attribute__ ((always_inline)) void
   brk (void)
   {
     aarch64_architecture_brk ();
   }
 
+  /**
+   * @details
+   * Forwards to `brk()`.
+   */
   inline __attribute__ ((always_inline)) void
   bkpt (void)
   {
     brk ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_wfi()`.
+   */
   inline __attribute__ ((always_inline)) void
   wfi (void)
   {
     aarch64_architecture_wfi ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_dsb()`.
+   */
   inline __attribute__ ((always_inline)) void
   dsb (void)
   {
     aarch64_architecture_dsb ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64_architecture_isb()`.
+   */
   inline __attribute__ ((always_inline)) void
   isb (void)
   {
@@ -198,30 +276,50 @@ namespace micro_os_plus::architecture
 {
   // --------------------------------------------------------------------------
 
+  /**
+   * @details
+   * Forwards to `aarch64::architecture::nop()`.
+   */
   inline __attribute__ ((always_inline)) void
   nop (void)
   {
     aarch64::architecture::nop ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64::architecture::brk()`.
+   */
   inline __attribute__ ((always_inline)) void
   brk (void)
   {
     aarch64::architecture::brk ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64::architecture::wfi()`.
+   */
   inline __attribute__ ((always_inline)) void
   wfi (void)
   {
     aarch64::architecture::wfi ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64::architecture::dsb()`.
+   */
   inline __attribute__ ((always_inline)) void
   data_barrier (void)
   {
     aarch64::architecture::dsb ();
   }
 
+  /**
+   * @details
+   * Forwards to `aarch64::architecture::isb()`.
+   */
   inline __attribute__ ((always_inline)) void
   instruction_barrier (void)
   {

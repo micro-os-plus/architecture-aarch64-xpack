@@ -9,6 +9,15 @@
  * obtained from https://opensource.org/licenses/mit.
  */
 
+/**
+ * @file
+ * @brief Declarations of the AArch64 architecture functions.
+ *
+ * @details
+ * These functions are defined in the `src` folder; they are used
+ * internally by other µOS++ packages.
+ */
+
 #ifndef MICRO_OS_PLUS_ARCHITECTURE_AARCH64_FUNCTIONS_H_
 #define MICRO_OS_PLUS_ARCHITECTURE_AARCH64_FUNCTIONS_H_
 
@@ -21,6 +30,19 @@ extern "C"
 {
 #endif // defined(__cplusplus)
 
+  /**
+   * @brief Display the CPU identification.
+   *
+   * @details
+   * Internal µOS++ function, called by the startup code (`run-main.cpp`
+   * in the `startup` package) before `main()`, when
+   * `MICRO_OS_PLUS_DEBUG_ENABLED` or `MICRO_OS_PLUS_DIAG_TRACE_ENABLED`
+   * is defined; it is not part of the application API, therefore it has
+   * no C++ equivalent.
+   *
+   * On AArch64 it is currently empty; it does not yet display the
+   * `MIDR_EL1` identification register.
+   */
   void
   micro_os_plus_architecture_show_cpuid (void);
 
