@@ -1,5 +1,7 @@
 {
   "descriptiveName": "Architecture: AArch64",
+  "permalinkName": "architecture-aarch64",
+  "preferredName": "Architecture: AArch64",
   "githubActionsNodeVersions": [
     "24"
   ],
