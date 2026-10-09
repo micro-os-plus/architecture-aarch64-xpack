@@ -6,8 +6,7 @@
   "description": "Top architecture AArch64 components",
   "cdlComponents": [
     {
-      "id": "micro-os-plus.architectures.aarch64",
-      "alias": "micro-os-plus.architecture",
+      "id": "micro-os-plus.architecture.aarch64",
       "display": "AArch64 (Cortex-A) architecture",
       "description": "The AArch64 architecture definitions, for 64-bit Cortex-A devices",
       "publicIncludeFolders": [
@@ -29,7 +28,7 @@
         "type": "c-header",
         "filePath": "{{buildFolderPath}}/generated/include/micro-os-plus/architecture-defines.h"
       },
-      // "defaultDefine": "MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED"
+      // "defaultDefine": "MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED"
     }
   ]
 }
