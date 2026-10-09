@@ -27,7 +27,7 @@ the µOS++ templates and `micro-test-plus` tests running on QEMU AArch64).
 To check changes locally, compile against the headers with the AArch64 cross
 toolchain (`~/.local/xPacks/@xpack-dev-tools/aarch64-none-elf-gcc/`), in
 both C and C++20, with `-Iinclude
--DMICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED`; without that define every
+-DMICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED`; without that define every
 header is empty and nothing is actually checked. `src/semihosting.cpp` also
 needs `-DMICRO_OS_PLUS_SEMIHOSTING_ENABLED` and a
 `micro-os-plus/semihosting.h` from the semihosting package. The xPack clang
@@ -41,7 +41,7 @@ Consumers integrate the package via:
   `micro-os-plus::architecture` (an `INTERFACE` library; sources propagate
   to the consumer).
 - Meson: `subdir(...)`, then use
-  `micro_os_plus_architectures_aarch64_dependency` or
+  `micro_os_plus_architecture_aarch64_dependency` or
   `micro_os_plus_architecture_dependency`.
 
 ### Generated files — do not edit by hand
@@ -77,7 +77,7 @@ Always reformat changed source files before committing.
 
 ### Compile-time enablement
 
-Everything is guarded by `MICRO_OS_PLUS_ARCHITECTURES_AARCH64_ENABLED`, which
+Everything is guarded by `MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED`, which
 is expected to come from the xcdl-generated
 `micro-os-plus/architecture-defines.h` (or from
 `micro-os-plus/project-config.h`); both are picked up via `__has_include` in
@@ -103,9 +103,21 @@ Each API is exposed in three parallel forms, which must be kept in sync:
 3. C++ wrappers in `namespace aarch64::architecture` and
    `namespace micro_os_plus::architecture`.
 
-Declarations live in `instructions.h` / `registers.h`; the `static inline
-__attribute__((always_inline))` bodies (inline assembly) live in `inlines/`
-and are included at the bottom of the declaring header.
+Declarations live in `instructions.h` / `registers.h`; the bodies (inline
+assembly) live in `inlines/` and are included at the bottom of the declaring
+header. Both declarations and definitions use
+`MICRO_OS_PLUS_ALWAYS_INLINE` (from `defines.h`, shared with the
+AArch32 package): `static inline __attribute__ ((always_inline))` in C, and
+`[[gnu::always_inline]] inline` in C++ (external linkage, required by the
+One Definition Rule). In C++ it must follow any standard attributes such as
+`[[nodiscard]]`; GNU `__attribute__` specifiers go after it. C++ wrappers are
+`noexcept`.
+
+The headers in `inlines/` are intentionally **not** self-contained: they
+include only system headers (such as `<stdint.h>`), never other local
+headers, and rely on the declaring header (or `architecture.h`) having
+included `defines.h` and `types.h` first. Do not add local includes to them.
+The other headers are expected to compile on their own.
 
 `inlines/semihosting-inlines.h` does not contain functions; it defines the
 architecture-width types (`micro_os_plus_semihosting_register_t`,
@@ -122,7 +134,9 @@ architecture-width types (`micro_os_plus_semihosting_register_t`,
 - [src/_init_fini.c](src/_init_fini.c): weak empty `_init()` / `_fini()`,
   required by newlib's `__libc_fini_array`.
 - [src/show-cpuid.cpp](src/show-cpuid.cpp):
-  `micro_os_plus_architecture_show_cpuid()`, currently an empty stub.
+  `micro_os_plus_architecture_show_cpuid()`, decodes `MIDR_EL1` (needs
+  EL1, which the µOS++ startup uses) and prints it via `diag-trace`, which
+  is included only if `__has_include` finds it (an optional dependency).
 
 ### Linker script
 
@@ -139,9 +153,11 @@ themselves.
   and `aarch64::architecture::brk()` are the current names. The `bkpt`
   variants are deprecated aliases kept for compatibility with 4.1.0; do not
   use them in new code.
-- The stack pointer getters (`*_get_sp()`, `registers::sp()`) read `sp`
-  with `mov`; AArch64 has no `msp`/`psp`, so Cortex-M names must not be
-  reintroduced.
+- The stack pointer getters and setters (`*_get_sp()` / `*_set_sp()`,
+  C++ `registers::sp()` / `registers::sp(register_t)`) use `mov` to and
+  from `sp`; AArch64 has no `msp`/`psp`, so Cortex-M names must not be
+  reintroduced. The setters are only safe without a live stack frame or
+  right before a `noreturn` call; keep that caveat in their documentation.
 
 ## Releases
 

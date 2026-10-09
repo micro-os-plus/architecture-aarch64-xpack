@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: 'Perform a thorough, uncompromising code review of C++ sources, headers, and documentation in the µOS++ Architecture: AArch64 project. Use when the user asks for a "code review", to "review the code", to "review changes", or to check a file, folder, or pull request for style, naming, documentation, and correctness issues.'
+description: 'Perform a thorough, uncompromising code review of C++ sources, headers, and documentation in the Architecture: AArch64 project. Use when the user asks for a "code review", to "review the code", to "review changes", or to check a file, folder, or pull request for style, naming, documentation, and correctness issues.'
 argument-hint: 'Optional: path or folder to review; defaults to the whole repository'
 ---
 
@@ -37,9 +37,10 @@ specifically, with file and line references.
 
 - Declarations live in `include/`, out-of-line definitions in `src/`,
   inline (header-only) definitions in `inlines/`.
-- There is only one public header,
-  `include/micro-os-plus/architecture.h`; internal headers are located in
-  `include/micro-os-plus/architecture-aarch64/`.
+- Usually there is only one public header (like
+  `include/micro-os-plus/architecture.h`);
+  internal headers are located in a subfolder named after the public header
+  (e.g. `include/micro-os-plus/architecture-cortexm/`).
 - New source files are registered in `xcdl-package.jsonc`, and the
   top-level `CMakeLists.txt` and `meson.build` are regenerated from it
   with `xpm run xcdl-export`; the generated files are not edited by hand.
@@ -121,6 +122,10 @@ specifically, with file and line references.
   `micro_os_plus::architecture` C++ namespaces); every function should
   exist in all forms, with consistent names, unless the omission is
   deliberate and justified.
+- Check API symmetry between related class templates (e.g. `doubly_list`
+  versus `intrusive_list`); if one offers a convenience method the other
+  lacks (such as `unlink_head`/`unlink_tail`), confirm this is a deliberate
+  design decision rather than an oversight, and note the justification.
 
 ### Toolchain verification
 

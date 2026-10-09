@@ -66,8 +66,8 @@ No need to add a tag here, it'll be added when the release is created.
 
 ### Increase the version
 
-Determine the upstream version (like `4.1.0`) and eventually update the
-`package.json` file; the format is `4.1.0-pre`.
+Determine the upstream version (like `5.0.0`) and eventually update the
+`package.json` file; the format is `5.0.0-pre`.
 
 ### Fix possible open issues
 
@@ -75,7 +75,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/micro-os-plus/architecture-aarch64-xpack/issues/>
 
-and fix them; assign them to a milestone (like `4.1.0`).
+and fix them; assign them to a milestone (like `5.0.0`).
 
 ### Update `README-MAINTAINER.md`
 
@@ -86,8 +86,8 @@ related to the new version.
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _\* v4.1.0_
-- commit with a message like _prepare v4.1.0_
+- add a new entry like _\* v5.0.0_
+- commit with a message like _prepare v5.0.0_
 
 ### Push changes
 
@@ -96,12 +96,13 @@ related to the new version.
 
 ### Manual tests
 
-To run the tests manually on the local machine:
+There are no tests in this package yet (`tests/` is a placeholder, and
+there are no `install-all` or `test-all` actions); the code is exercised
+by the tests of the dependent packages, running on QEMU AArch64.
 
-```sh
-xpm run install-all -C ~/Work/micro-os-plus/architecture-aarch64-xpack.git
-xpm run test-all -C ~/Work/micro-os-plus/architecture-aarch64-xpack.git
-```
+At least check that the sources compile without warnings with the
+AArch64 cross toolchain, in C and C++, with
+`-DMICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED`.
 
 ## Publish on the npmjs.com server
 
@@ -111,11 +112,11 @@ xpm run test-all -C ~/Work/micro-os-plus/architecture-aarch64-xpack.git
   only `package.json`, `README.md`, `LICENSE`, `CHANGELOG.md`,
   the sources and CMake/meson files;
   possibly adjust `.npmignore`
-- `npm version 4.1.0`
+- `npm version 5.0.0`
 - push the `xpack-development` branch to GitHub
 - the `postversion` npm script should also update tags via `git push origin --tags`
 - wait for the CI job to complete
-  (<https://github.com/micro-os-plus/architecture-aarch64-xpack/actions/workflows/ci.yml>)
+  (<https://github.com/micro-os-plus/architecture-aarch64-xpack/actions/workflows/test-ci.yml>)
 
 ### Test on all platforms
 
@@ -154,5 +155,5 @@ When the package is considered stable:
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @micro-os-plus/architecture-aarch64`
-- `npm dist-tag add @micro-os-plus/architecture-aarch64@4.1.0 latest`
+- `npm dist-tag add @micro-os-plus/architecture-aarch64@5.0.0 latest`
 - `npm dist-tag ls @micro-os-plus/architecture-aarch64`
