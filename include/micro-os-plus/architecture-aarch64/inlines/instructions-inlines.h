@@ -46,7 +46,7 @@ extern "C"
    * has no clobbers, since the instruction has no effect on registers or
    * memory.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_nop (void)
   {
     __asm__ volatile (
@@ -66,7 +66,7 @@ extern "C"
    * debugger sees all the preceding stores, and the code after it reads
    * again any values changed from the debugger.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_brk (void)
   {
     __asm__ volatile (
@@ -85,7 +85,7 @@ extern "C"
    * @details
    * Forwards to `aarch64_architecture_brk()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_bkpt (void)
   {
     aarch64_architecture_brk ();
@@ -96,7 +96,7 @@ extern "C"
    * The `"memory"` clobber forces the compiler to read again, after the
    * instruction, any values that interrupt handlers may have changed.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_wfi (void)
   {
     __asm__ volatile (
@@ -114,7 +114,7 @@ extern "C"
    * The `"memory"` clobber makes the hardware barrier also a compiler
    * barrier, so that memory accesses are not moved across it.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_dsb (void)
   {
     __asm__ volatile (
@@ -132,7 +132,7 @@ extern "C"
    * The `"memory"` clobber makes the hardware barrier also a compiler
    * barrier, so that memory accesses are not moved across it.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_isb (void)
   {
     __asm__ volatile (
@@ -149,7 +149,7 @@ extern "C"
    * @details
    * Forwards to `aarch64_architecture_nop()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_nop (void)
   {
     aarch64_architecture_nop ();
@@ -159,7 +159,7 @@ extern "C"
    * @details
    * Forwards to `aarch64_architecture_brk()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_brk (void)
   {
     aarch64_architecture_brk ();
@@ -169,7 +169,7 @@ extern "C"
    * @details
    * Forwards to `aarch64_architecture_wfi()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_wfi (void)
   {
     aarch64_architecture_wfi ();
@@ -179,7 +179,7 @@ extern "C"
    * @details
    * Forwards to `aarch64_architecture_dsb()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_data_barrier (void)
   {
     aarch64_architecture_dsb ();
@@ -189,7 +189,7 @@ extern "C"
    * @details
    * Forwards to `aarch64_architecture_isb()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_instruction_barrier (void)
   {
     aarch64_architecture_isb ();
@@ -213,7 +213,7 @@ namespace aarch64::architecture
    * @details
    * Forwards to `aarch64_architecture_nop()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   nop (void) noexcept
   {
     aarch64_architecture_nop ();
@@ -223,7 +223,7 @@ namespace aarch64::architecture
    * @details
    * Forwards to `aarch64_architecture_brk()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   brk (void) noexcept
   {
     aarch64_architecture_brk ();
@@ -233,7 +233,7 @@ namespace aarch64::architecture
    * @details
    * Forwards to `brk()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   bkpt (void) noexcept
   {
     brk ();
@@ -243,7 +243,7 @@ namespace aarch64::architecture
    * @details
    * Forwards to `aarch64_architecture_wfi()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   wfi (void) noexcept
   {
     aarch64_architecture_wfi ();
@@ -253,7 +253,7 @@ namespace aarch64::architecture
    * @details
    * Forwards to `aarch64_architecture_dsb()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   dsb (void) noexcept
   {
     aarch64_architecture_dsb ();
@@ -263,7 +263,7 @@ namespace aarch64::architecture
    * @details
    * Forwards to `aarch64_architecture_isb()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   isb (void) noexcept
   {
     aarch64_architecture_isb ();
@@ -280,7 +280,7 @@ namespace micro_os_plus::architecture
    * @details
    * Forwards to `aarch64::architecture::nop()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   nop (void) noexcept
   {
     aarch64::architecture::nop ();
@@ -290,7 +290,7 @@ namespace micro_os_plus::architecture
    * @details
    * Forwards to `aarch64::architecture::brk()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   brk (void) noexcept
   {
     aarch64::architecture::brk ();
@@ -300,7 +300,7 @@ namespace micro_os_plus::architecture
    * @details
    * Forwards to `aarch64::architecture::wfi()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   wfi (void) noexcept
   {
     aarch64::architecture::wfi ();
@@ -310,7 +310,7 @@ namespace micro_os_plus::architecture
    * @details
    * Forwards to `aarch64::architecture::dsb()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   data_barrier (void) noexcept
   {
     aarch64::architecture::dsb ();
@@ -320,7 +320,7 @@ namespace micro_os_plus::architecture
    * @details
    * Forwards to `aarch64::architecture::isb()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   instruction_barrier (void) noexcept
   {
     aarch64::architecture::isb ();

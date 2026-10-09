@@ -54,7 +54,7 @@ extern "C"
    *
    * It is not a compiler barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_nop (void);
 
   /**
@@ -69,7 +69,7 @@ extern "C"
    * It also acts as a compiler memory barrier, so that a debugger
    * stopped at the breakpoint sees all the preceding stores in memory.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_brk (void);
 
   /**
@@ -79,7 +79,7 @@ extern "C"
    * Kept for compatibility with earlier releases; `bkpt` is the
    * AArch32/Cortex-M mnemonic. Use `aarch64_architecture_brk()`.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE
+  MICRO_OS_PLUS_ALWAYS_INLINE
   __attribute__ ((deprecated ("use aarch64_architecture_brk()"))) void
   aarch64_architecture_bkpt (void);
 
@@ -99,7 +99,7 @@ extern "C"
    * entering the low power state, call `aarch64_architecture_dsb()`
    * first.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_wfi (void);
 
   /**
@@ -112,7 +112,7 @@ extern "C"
    *
    * It also acts as a compiler memory barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_dsb (void);
 
   /**
@@ -126,7 +126,7 @@ extern "C"
    *
    * It also acts as a compiler memory barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   aarch64_architecture_isb (void);
 
   // --------------------------------------------------------------------------
@@ -140,7 +140,7 @@ extern "C"
    * it is implemented with the `nop` instruction, which is not guaranteed
    * to take any time, therefore it must not be used for timing delays.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_nop (void);
 
   /**
@@ -154,7 +154,7 @@ extern "C"
    *
    * It also acts as a compiler memory barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_brk (void);
 
   /**
@@ -170,7 +170,7 @@ extern "C"
    * the low power state, call `micro_os_plus_architecture_data_barrier()`
    * first.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_wfi (void);
 
   /**
@@ -183,7 +183,7 @@ extern "C"
    *
    * On AArch64, it is implemented with the `dsb sy` instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_data_barrier (void);
 
   /**
@@ -198,7 +198,7 @@ extern "C"
    *
    * On AArch64, it is implemented with the `isb` instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   micro_os_plus_architecture_instruction_barrier (void);
 
   // --------------------------------------------------------------------------
@@ -224,7 +224,7 @@ namespace aarch64::architecture
    * not guaranteed to take any time, therefore it must not be used for
    * timing delays.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   nop (void) noexcept;
 
   /**
@@ -236,7 +236,7 @@ namespace aarch64::architecture
    * none, by the application exception handler. It also acts as a
    * compiler memory barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   brk (void) noexcept;
 
   /**
@@ -246,7 +246,7 @@ namespace aarch64::architecture
    * Kept for compatibility with earlier releases; `bkpt` is the
    * AArch32/Cortex-M mnemonic. Use `brk()`.
    */
-  [[deprecated ("use brk()")]] MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  [[deprecated ("use brk()")]] MICRO_OS_PLUS_ALWAYS_INLINE void
   bkpt (void) noexcept;
 
   /**
@@ -257,7 +257,7 @@ namespace aarch64::architecture
    * execution until a wake-up event, such as an interrupt, occurs, and
    * acts as a compiler memory barrier, but not as a hardware barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   wfi (void) noexcept;
 
   /**
@@ -268,7 +268,7 @@ namespace aarch64::architecture
    * Synchronisation Barrier, full system); it also acts as a compiler
    * memory barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   dsb (void) noexcept;
 
   /**
@@ -278,7 +278,7 @@ namespace aarch64::architecture
    * C++ equivalent of `aarch64_architecture_isb()` (Instruction
    * Synchronisation Barrier); it also acts as a compiler memory barrier.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   isb (void) noexcept;
 
   // --------------------------------------------------------------------------
@@ -296,7 +296,7 @@ namespace micro_os_plus::architecture
    * C++ equivalent of `micro_os_plus_architecture_nop()`, available on
    * all µOS++ architectures; on AArch64, it executes a `nop` instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   nop (void) noexcept;
 
   /**
@@ -307,7 +307,7 @@ namespace micro_os_plus::architecture
    * all µOS++ architectures; on AArch64, it executes a `brk #0`
    * instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   brk (void) noexcept;
 
   /**
@@ -317,7 +317,7 @@ namespace micro_os_plus::architecture
    * C++ equivalent of `micro_os_plus_architecture_wfi()`, available on
    * all µOS++ architectures; on AArch64, it executes a `wfi` instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   wfi (void) noexcept;
 
   /**
@@ -327,7 +327,7 @@ namespace micro_os_plus::architecture
    * The C++ equivalent of `micro_os_plus_architecture_data_barrier()`;
    * on AArch64, it is implemented with the `dsb sy` instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   data_barrier (void) noexcept;
 
   /**
@@ -338,7 +338,7 @@ namespace micro_os_plus::architecture
    * `micro_os_plus_architecture_instruction_barrier()`; on AArch64,
    * it is implemented with the `isb` instruction.
    */
-  MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE void
+  MICRO_OS_PLUS_ALWAYS_INLINE void
   instruction_barrier (void) noexcept;
 
   // --------------------------------------------------------------------------
