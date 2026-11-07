@@ -1,7 +1,7 @@
 {
   "name": "@micro-os-plus/architecture-aarch64",
-  "version": "4.1.0",
-  "description": "A source code library with the µOS++ architecture definitions for Arm AArch64 (64-bit Cortex-A)",
+  "version": "5.0.0-pre",
+  "description": "A source code library with the µOS++ architecture port for Arm AArch64 (64-bit Cortex-A)",
   "keywords": [
     "xpack",
     "c++",
@@ -64,7 +64,8 @@
       "clang-format": "node maintenance/scripts/clang-format.mjs",
       "cmake-format": "node maintenance/scripts/cmake-format.mjs",
       "jsonc-format": "node maintenance/scripts/jsonc-format.mjs",
-      "xcdl-export": "node maintenance/scripts/xcdl-export.mjs xcdl-package.json*"
+      "xcdl-export": "node maintenance/scripts/xcdl-export.mjs xcdl-package.json*",
+      "xpm-link": "xpm link"
     }
   },
   "engines": {
