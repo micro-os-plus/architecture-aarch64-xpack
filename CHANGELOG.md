@@ -6,9 +6,33 @@ Please check
 [GitHub](https://github.com/micro-os-plus/architecture-aarch64-xpack/issues/)
 and close existing issues and pull requests.
 
+## 2026-10-01
+
+* cfa19d4 rename package description
+* 783894c rename _ARCHITECTURE_STACK_FILL_MAGIC
+* 36ac9e9 implement show_cpuid
+* 576c61b cleanup
+* bfe6874 add MICRO_OS_PLUS_ARCHITECTURE_ALWAYS_INLINE
+* 71719f4 add noexcept and nodiscard
+* c2e802d add doxygen comments
+* c121c5e brk() with memory clobber
+* 7fc2051 semihosting.cpp: document clobber
+* e468797 semihosting.cpp rework with hlt
+* 804b4e3 wfi with memory barrier
+* db1ddc9 semihosting.cpp: fix conditional compilation
+* 1e81d9f add stack setter
+* 3990d56 copilot instructions
+* 41e14c7 cosmetics
+* 54bff27 enable MICRO_OS_PLUS_ARCHITECTURE_AARCH64_ENABLED guard
+* 8a677da get_sp()
+* b94f9d0 architecture::brk for deprecated bkpt
+* ecb0097 add data/instruction barrier
+* 69869f1 check __ASSEMBLER__
+
 ## 2026-09-09
 
-* v4.1.0
+* c947319 4.1.0
+* 5110712 prepare v4.1.0
 * c7c2f8b re-format
 
 ## 2026-09-08

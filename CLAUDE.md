@@ -37,8 +37,8 @@ works with `--target=aarch64-none-elf -ffreestanding`.
 Consumers integrate the package via:
 
 - CMake: `add_subdirectory("xpacks/@micro-os-plus/architecture-aarch64")`,
-  then link `micro-os-plus::architectures-aarch64` or the generic alias
-  `micro-os-plus::architecture` (an `INTERFACE` library; sources propagate
+  then link `micro-os-plus::architectures-aarch64`
+  (an `INTERFACE` library; sources propagate
   to the consumer).
 - Meson: `subdir(...)`, then use
   `micro_os_plus_architecture_aarch64_dependency` or
